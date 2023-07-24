@@ -1,2 +1,2 @@
-# exercicios em linguagem C
+# exercicios-linguagem C
  primeiro repositório criado
