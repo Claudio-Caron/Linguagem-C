@@ -70,10 +70,10 @@ int main (){
             }
             printf ("\n");
             break;
-        }
+        
         case 6:
             printf ("----------opcao 5----------\nimprimir todos os elementos, exceto os da diagonal principal\n");
-
+        }
 
     }while (opcao!=0);
 
