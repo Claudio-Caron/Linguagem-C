@@ -1,0 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(int argc, char const *argv[])
+{
+    /* Crie um alg qeu leia um vetor A de posições e construa outro da seguinte forma: Se o índice de A for par, eleve ao quadrado, senão, multiplique por dois(crie um vetor B para receber o resultado)   */
+    system ("pause");
+    return 0;
+}
