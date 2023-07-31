@@ -20,7 +20,7 @@ int main (){
         fgets (nome[i], tam, stdin);
         fflush (stdin);
 
-        puts (idade: );
+        puts (idade:  );
         scanf ("%d", idade[i]);
         fflush (stdin);
 
