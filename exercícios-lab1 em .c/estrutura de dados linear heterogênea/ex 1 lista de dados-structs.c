@@ -4,7 +4,7 @@
 #include <locale.h>
 #include <ctype.h>
 //solicitar um formulário com N pessoas, solicitando nome, peso, altura, idade e sexo. Mostrar os dados digitados
-#define N 3
+#define N 2
 //O valor de N define a quantidade de pessoas que será solicitado o formulário
 struct tipo_pessoa {
     int idade;
