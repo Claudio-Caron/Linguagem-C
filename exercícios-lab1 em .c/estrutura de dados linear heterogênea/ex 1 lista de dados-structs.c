@@ -5,6 +5,7 @@
 #include <ctype.h>
 //solicitar um formulário com N pessoas, solicitando nome, peso, altura, idade e sexo. Mostrar os dados digitados
 #define N 2
+
 //O valor de N define a quantidade de pessoas que será solicitado o formulário
 struct tipo_pessoa {
     int idade;
@@ -33,7 +34,7 @@ int main (){
             puts ("insira novamente, dessa vez, opte somente feminino ou masculino, f ou m");   
         }
         }while (form[i].sexo!='f' && form[i].sexo!='F' && form[i].sexo!='m' && form[i].sexo!='M');
-
+        form[i].sexo = toupper(form[i].sexo);
         puts ("Idade:  ");
         scanf ("%d", &form[i].idade);
         fflush (stdin);
