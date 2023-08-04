@@ -1,10 +1,10 @@
-/*2. OperaÃ§Ãµes sobre vetor. Declare, na regiÃ£o global, um vetor de inteiros de 
-5 posiÃ§Ãµes. 
-O usuÃ¡rio deve informar uma das seguintes opÃ§Ãµes: 
-1. Inserir 2. Imprimir 3. Sair. 
-Exiba este menu enquanto a opÃ§Ã£o for diferente de 3. 
-Ambas opÃ§Ãµes, 2 e 3, devem imprimir os elementos do vetor. 
-FaÃ§a uso de laÃ§o do-while e de switch-case.*/
+/*2. Operações sobre vetor. Declare, na região global, um vetor de inteiros de
+5 posições.
+O usuário deve informar uma das seguintes opções:
+1. Inserir 2. Imprimir 3. Sair.
+Exiba este menu enquanto a opção for diferente de 3.
+Ambas opções, 2 e 3, devem imprimir os elementos do vetor.
+Faça uso de laço do-while e de switch-case.*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -24,15 +24,15 @@ int main(){
         op2();
     }
     printf ("1-Inserir dados no vetor\n2-Imprimir o Vetor\n3-Sair\n");
-    puts (" Qual das trÃªs opÃ§Ãµes deseja escolher?");
+    puts (" Qual das três opções deseja escolher?");
     scanf ("%i", &op);
-        system ("cls");
     escolha(op);
     if (op>3 || op<=0){
         system ("cls");
         printf ("INSIRA SOMENTE UMA DAS ALTERNATIVAS SOLICITADAS!!!\n");
         continue;
     }
+    system ("cls");
     }while (op!=3);
     system ("pause");
     return 0;
@@ -66,7 +66,7 @@ void escolha(int x){
             op2();
             break;
         case 3:
-            printf ("opÃ§Ã£o 3 escolhida! programa encerrado");
+            printf ("opção 3 escolhida! programa encerrado");
             op2();
             break;
 
