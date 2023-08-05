@@ -19,10 +19,10 @@ int main (){
     setlocale (LC_ALL, "Portuguese");
     tipo_pessoa form[N];
     int i;
-    /*int x;*/
+    //int x;
     puts ("\t\t\t\t\t-----------Formulário pessoal----------\n\n");
     for (i=0; i<N; i++){
-        printf ("\tDados da pessoa (%i)\n------------------------------------\n", i+1);
+        printf ("\tDados da pessoa (%i)\n------------------------------------\n", i);
         puts ("nome : ");
         fgets (form[i].nome, 50, stdin);
         do{
@@ -47,21 +47,25 @@ int main (){
         scanf ("%f", &form[i].peso);
         fflush (stdin);
         system ("cls");
-       /*printf ("Para continuar, insira 1, para preencher novamente os dados da pessoa, 2\n");
+        printf ("Para continuar, insira 1, para preencher novamente os dados da pessoa anterior, 2\n");
         scanf ("%i", &x);
-        switch (x){
+        /*switch (x){
             case 1:
                 continue;
             case 2:
-                printf ("Opção escoçhida %i\nSolicitando novamente os dados da pessoa %i:\n");
+                printf ("Opção escoçhida : 2\nSolicitando novamente os dados da pessoa %i:\n", i+1);
+                strcpy (form[i].nome, "");
+                strcpy (form[i].sexo, "");
+                i--;
                 i--;
                 continue;
             default:
                 printf ("Insira uma opção correta, apenas 1 ou 2\n");
                 printf ("Para continuar, insira 1, para preencher novamente os dados da pessoa, 2\n");
                 scanf ("%i", &x);
-                // a versão com switch não funciona por enquanto, pois se fosse utilizado o loop para garantir a veracidade da resposta, o "continue" da opção 1 ou 2 iria retornar ao loop do while do switch e nunca ao for;
-        }*/
+                // nao deu certo para solicitar novamente
+        }
+        i--;*/
     }
     puts ("---------dados inseridos das respectivas pessoas---------\n");
     for (i=0; i<N; i++){
