@@ -47,9 +47,9 @@ int main (){
         scanf ("%f", &form[i].peso);
         fflush (stdin);
         system ("cls");
-        printf ("Para continuar, insira 1, para preencher novamente os dados da pessoa anterior, 2\n");
+        /*printf ("Para continuar, insira 1, para preencher novamente os dados da pessoa anterior, 2\n");
         scanf ("%i", &x);
-        /*switch (x){
+        switch (x){
             case 1:
                 continue;
             case 2:
