@@ -47,6 +47,7 @@ int main (){
         scanf ("%f", &form[i].peso);
         fflush (stdin);
         system ("cls");
+        //chamar a função de baixo
         /*printf ("Para continuar, insira 1, para preencher novamente os dados da pessoa anterior, 2\n");
         scanf ("%i", &x);
         switch (x){
@@ -69,6 +70,7 @@ int main (){
     }
     puts ("---------dados inseridos das respectivas pessoas---------\n");
     for (i=0; i<N; i++){
+        //otimizar usando uma função para mostrar os dados da pessoa
         printf ("-------Preenchimento da pessoa %i-------\n", i+1);
         puts ("_______________________________________");
         printf ("\tNome  : %s\n\tIdade : %d anos\n\tAltura: %.2f Metros\n", form[i].nome, form[i].idade, form[i].altura/100);
