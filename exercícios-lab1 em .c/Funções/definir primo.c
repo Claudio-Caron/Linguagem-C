@@ -18,11 +18,10 @@ int primo (int x){
         if (j==0){
             cont++;
         }
-        if (cont==2){
+    }
+    if (cont==2){
             return 1;
         }else{
             return 0;
         }
-
-    }
 }
