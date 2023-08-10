@@ -22,7 +22,7 @@ int main (){
     //int x;
     puts ("\t\t\t\t\t-----------Formulário pessoal----------\n\n");
     for (i=0; i<N; i++){
-        printf ("\tDados da pessoa (%i)\n------------------------------------\n", i);
+        printf ("\t\t\t\t\tDados da pessoa (%i)\n\t\t\t--------------------------------------------------\n", i);
         puts ("nome : ");
         fgets (form[i].nome, 50, stdin);
         do{
