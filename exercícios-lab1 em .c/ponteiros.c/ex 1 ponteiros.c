@@ -17,31 +17,42 @@ estrutura dentro de um módulo não requer o seu retorno.
 Para esta tarefa, declare o vetor na função main()*/
 //void armvetor(int *);
 void imprimir (int *);
-void armvetor (int *);
+void duplicar(int *);
+void remover (int *, int contesp);
 int main (){
     char a;
-    int vet[10]={1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    //int *pvet;
-    //int pvet=&vet[10];
+    int vet[10]={1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, cont=10;
+    /*int *pvet, cont=0;
+    pvet=&vet;*/
     do {
-        printf ("Escolha uma opcao\n[D]uplicar\n[I]mprimir\n[R]emover\n[S]air\n");
+        puts ("Essa mensagem deve ser apagada");
+        //system ("cls");
+        printf ("\t\t\t\t\t___________________\n");
+        printf ("\t\t\t\t\t|Escolha uma opcao|\n\t\t\t\t\t|-----------------|\n\t\t\t\t\t|[D]uplicar       |\n\t\t\t\t\t|-----------------|\n\t\t\t\t\t");
+        printf ("|[I]mprimir       |\n\t\t\t\t\t|-----------------|\n\t\t\t\t\t|[R]emover        |\n\t\t\t\t\t|-----------------|\n\t\t\t\t\t|[S]air           |\n");
+        printf ("\t\t\t\t\t|-----------------|\n\t\t\t\t\t\t ");
         scanf ("%c", &a);
         a = toupper (a);
         switch (a) {
             case 'D':
-                printf ("opcao escolhida: DUPLICAR");
-                //
+                system ("cls");
+                printf ("\t\t\topcao escolhida: DUPLICAR\n");
+                duplicar (vet);
                 break;
             case 'I':
-                printf ("opcao escolhida: IMPRIMIR\n");
+                system ("cls");
+                printf ("\t\t\topcao escolhida: IMPRIMIR\n");
                 imprimir(vet);
                 break;
             case 'R':
-                printf ("opcao escolhida: REMOVER");
-                //
+                system ("cls");
+                printf ("\t\t\topcao escolhida: REMOVER\n");
+                cont--;
+                remover (vet,cont);//tentar usar o cont dentro da chave
                 break;
             case 'S':
-                printf ("opcao escolhida: SAIR\n");
+                system ("cls");
+                printf ("\t\t\topcao escolhida: SAIR\n");
                 imprimir(vet);
                 break;
         }
@@ -50,11 +61,9 @@ int main (){
     system ("pause");
     return 0;
 }
-void armvetor(int *pvet){
+void duplicar(int *pvet){
     int i;
     for (i=0; i<10; i++){
-        printf ("insira o valor da posicao %i do vetor\n", i+1);
-        scanf ("%i", &pvet[i]);
         pvet[i]= pvet[i] * 2;
     }
     imprimir (pvet);
@@ -67,7 +76,12 @@ void imprimir(int *pvet){
     }
     printf ("\n");
 }
-void escolha (){
+void remover (int *pvet, int contesp){
+    pvet[contesp]=0;
+    imprimir (pvet);
+}
+
+/*void escolha (){
     printf ("Escolha uma opcao\n[D]uplicar\n[I]mprimir\n[R]emover\n[S]air\n");
     scanf ("%c", &a);
     toupper ('a');
@@ -79,4 +93,4 @@ void escolha (){
             imprimir()
 
     }
-}
+}*/
