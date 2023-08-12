@@ -19,21 +19,21 @@ Para esta tarefa, declare o vetor na função main()*/
 void imprimir (int *);
 void armvetor (int *);
 int main (){
-    int a;
+    char a;
     int vet[10]={1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     //int *pvet;
     //int pvet=&vet[10];
     do {
         printf ("Escolha uma opcao\n[D]uplicar\n[I]mprimir\n[R]emover\n[S]air\n");
         scanf ("%c", &a);
-        toupper ('a');
+        a = toupper (a);
         switch (a) {
             case 'D':
                 printf ("opcao escolhida: DUPLICAR");
                 //
                 break;
             case 'I':
-                printf ("opcao escolhida: IMPRIMIR");
+                printf ("opcao escolhida: IMPRIMIR\n");
                 imprimir(vet);
                 break;
             case 'R':
@@ -61,13 +61,13 @@ void armvetor(int *pvet){
 }
 void imprimir(int *pvet){
     int i;
-    printf ("Vetor: ");
+    printf ("Vetor: \n");
     for(i=0; i<10; i++){
         printf ("%i ", pvet[i]);
     }
     printf ("\n");
 }
-//void escolha (){
+void escolha (){
     printf ("Escolha uma opcao\n[D]uplicar\n[I]mprimir\n[R]emover\n[S]air\n");
     scanf ("%c", &a);
     toupper ('a');
