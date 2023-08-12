@@ -15,58 +15,53 @@ Todos os elementos do vetor são impressos e o sistema é encerrado
 Obs.: Todo vetor é passado por referência. Logo, qualquer modificação nesta 
 estrutura dentro de um módulo não requer o seu retorno.
 Para esta tarefa, declare o vetor na função main()*/
-//void armvetor(int *);
 void imprimir (int *);
 void duplicar(int *);
 void remover (int *, int contesp);
 int main (){
     char a;
     int vet[10]={1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, cont=10;
-    /*int *pvet, cont=0;
-    pvet=&vet;*/
     do {
-        puts ("Essa mensagem deve ser apagada");
-        //system ("cls");
         printf ("\t\t\t\t\t___________________\n");
         printf ("\t\t\t\t\t|Escolha uma opcao|\n\t\t\t\t\t|-----------------|\n\t\t\t\t\t|[D]uplicar       |\n\t\t\t\t\t|-----------------|\n\t\t\t\t\t");
         printf ("|[I]mprimir       |\n\t\t\t\t\t|-----------------|\n\t\t\t\t\t|[R]emover        |\n\t\t\t\t\t|-----------------|\n\t\t\t\t\t|[S]air           |\n");
-        printf ("\t\t\t\t\t|-----------------|\n\t\t\t\t\t\t ");
+        printf ("\t\t\t\t\t|-----------------|\n\t\t\t\t\t\t");
         scanf ("%c", &a);
+        while (getchar() != '\n');
         a = toupper (a);
+        system ("cls");
         switch (a) {
             case 'D':
-                system ("cls");
+                //system ("cls");
                 printf ("\t\t\topcao escolhida: DUPLICAR\n");
                 duplicar (vet);
                 break;
             case 'I':
-                system ("cls");
+                //system ("cls");
                 printf ("\t\t\topcao escolhida: IMPRIMIR\n");
                 imprimir(vet);
                 break;
             case 'R':
-                system ("cls");
+                //system ("cls");
                 printf ("\t\t\topcao escolhida: REMOVER\n");
                 cont--;
                 remover (vet,cont);//tentar usar o cont dentro da chave
                 break;
             case 'S':
-                system ("cls");
+                //system ("cls");
                 printf ("\t\t\topcao escolhida: SAIR\n");
                 imprimir(vet);
+                break;
+            default :
+                system ("cls");
+                printf ("\n\t\t\tDigite apenas uma das letras inicias de comando\n");
+                //system ("cls");
                 break;
         }
     }while(a!='S');
 
     system ("pause");
     return 0;
-}
-void duplicar(int *pvet){
-    int i;
-    for (i=0; i<10; i++){
-        pvet[i]= pvet[i] * 2;
-    }
-    imprimir (pvet);
 }
 void imprimir(int *pvet){
     int i;
@@ -75,6 +70,13 @@ void imprimir(int *pvet){
         printf ("%i ", pvet[i]);
     }
     printf ("\n");
+}
+void duplicar(int *pvet){
+    int i;
+    for (i=0; i<10; i++){
+        pvet[i]= pvet[i] * 2;
+    }
+    imprimir (pvet);
 }
 void remover (int *pvet, int contesp){
     pvet[contesp]=0;
