@@ -19,8 +19,8 @@ void receber (int *esp1, int *esp2){
         *maior=&esp1;
         *menor=&esp2;
     }else {
-        *menor=esp1;
-        *maior=esp2;
+        *menor=&esp1;
+        *maior=&esp2;
     }
     
 }
