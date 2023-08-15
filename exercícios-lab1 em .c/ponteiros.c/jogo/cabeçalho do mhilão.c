@@ -20,7 +20,7 @@ int main(){
     Sleep (3000);
     printf ("\n\n\t\t\t\tPrepare seu shake\n");
     Sleep (1500);
-    printf ("\t\t\t\tO jogo irá iniciar");
+    printf ("\t\t\t\tO jogo ira iniciar");
     Sleep(1000);
     for (j=0; j<3; j++){
         printf (".");
