@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>//rand()
 void show();
 void pergunta();
 void escolha();
