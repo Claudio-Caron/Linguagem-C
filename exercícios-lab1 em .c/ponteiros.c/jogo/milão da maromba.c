@@ -7,25 +7,17 @@
 #include <windows.h>
 #define alternativa 150
 char perg[10][4][alternativa];
+void mensrodada(int esprodada);
 void preencher();
 void pergunta();
 void escolha();
 void certo();
-int p1(char gaba, int x);
-/*void p2(char *, int *);
-void p3(char *, int *);
-void p4(char *, int *);
-void p5(char *, int *);
-void p6(char *, int *);
-void p7(char *, int *);
-void p9(char *, int *);
-int p10(char *, int *);*/
+void mensagem();
+int p1(char gaba, int x, char esppremios[][40], int z);
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
-    int x, y;
     void preencher();
-    mensagem();
     escolha();
     system("pause");
     return 0;
@@ -90,34 +82,35 @@ void escolha()
         switch (rodada)
         {
         case 0: // inicia rodada 1, porém, utilizei o 0 para reciclar a variavel em outra função
-            cont = p1(gabarito[0], rodada, premios[]);
+            mensrodada(rodada);
+            cont = p1(gabarito[0], rodada, premios, 0);//se não der certo, tentar jogar [] da matriz para cima e deixar como parametro em baixo so o nome da matriz; ou ainda fazer uma função somente para os premios;
             break;
         case 1:
-            cont = p1(gabarito[1], rodada);
+            cont = p1(gabarito[1], rodada, premios, 1);
             break;
         case 2:
-            cont = p1(gabarito[2], rodada);
+            cont = p1(gabarito[2], rodada, premios, 2);
             break;
         case 3:
-            cont = p1(gabarito[3], rodada);
+            cont = p1(gabarito[3], rodada, premios, 3);
             break;
         case 4:
-            cont = p1(gabarito[4], rodada);
+            cont = p1(gabarito[4], rodada, premios, 4);
             break;
         case 5:
-            cont = p1(gabarito[5], rodada);
+            cont = p1(gabarito[5], rodada, premios, 5);
             break;
         case 6:
-            cont = p1(gabarito[6], rodada);
+            cont = p1(gabarito[6], rodada, premios, 6);
             break;
         case 7:
-            cont = p1(gabarito[7], rodada);
+            cont = p1(gabarito[7], rodada, premios, 7);
             break;
         case 8:
-            cont = p1(gabarito[8], rodada);
+            cont = p1(gabarito[8], rodada, premios, 8);
             break;
         case 9:
-            cont = p1(gabarito[9], rodada);
+            cont = p1(gabarito[9], rodada, premios, 9);
             break;
         }
         rodada++;
@@ -125,25 +118,25 @@ void escolha()
 }
 void mensrodada(int esprodada)
 {
-    printf("\t\t\tRodada %d, Responda a pergunta corretamente e acumule prêmios!\n", esprodada);
+    printf("\t\t\tRodada %d, Responda a pergunta corretamente e acumule prêmios!\n", esprodada+1);
 }
 void certo()
 {
     printf("\t\t\t\tResposta correta!\n\t\t\t\tAguarde para prosseguir\n");
 }
-int p1(char gaba, int x)
+int p1(char gaba, int x, char esppremios[][40], int z)
 {
-    char perguntas[11][180] = {
+    char perguntas[11][200] = {
         "1- Qual é a finalidade do exercício \"rosca martelo\"?",
-        "2- Qual alimento é responsável por promover a vaso-dilatação nos treinos, reduzindo a pressão arterial, e elevando a taxa de circulação sanguínea, irrigando os músculos com mais eficiência durante os treinos?",
-        "3- Qual alimento é reconhecido por retirar as câimbras de pessoas, pela sua rica fonte de potássio, promovendo a infiltração de sódio nos tecidos musculares, auxiliando na contração e recuperação muscular?",
+        "2- Qual alimento e responsável por promover a vaso-dilatação nos treinos,elevando a taxa de circulação sanguínea, irrigando os músculos com mais eficiência durante os treinos?",
+        "3- Qual alimento é reconhecido por retirar as câimbras, pela sua rica fonte de potássio, auxiliando na contração e recuperação muscular?",
         "4- O que significa \"PR\" em musculação?",
         "5- Qual termo é usado para descrever o processo de redução de gordura corporal para destacar a definição muscular?",
         "6- Qual é a técnica em que você realiza esforço na fase excêntrica do exercício, na falha muscular?",
         "7- Qual é o papel das gorduras na dieta de um praticante de musculação?",
         "8- Qual é a importância da periodização no treinamento de musculação?",
         "9- Professor é Fake-Natty?",
-        "10- O que é o \"overtraining\" e por que é importante evitá-lo?";
+        "10- O que é o \"overtraining\" e por que é importante evitá-lo?"};
     char r;
     int i;
     // int x=0;//posisao do vetor da pergunta;(usar como parâmetro em chamarpergunta)
@@ -176,15 +169,16 @@ int p1(char gaba, int x)
     if (r == gaba)
     {
         certo();
-        printf("Premio da rodada: 1 hiper calor\n"); // usar vetor para os premios tentar local ou global
-        sleep(2000);
+        printf ("Premio obtido na rodada: %s\n", esppremios[z]);   // usar vetor para os premios tentar local ou global
+        Sleep(2000);
         system("cls");
         return 0;
     }
     else
     {
-        puts("Resposta incorreta! Você não garantiu prêmios");
-        puts("\t\t\tVOCÊ É FRANGOLINO!!!"); // função para desenhar um frango se tiver tempo
+        //fazer um for para mostrar os premios conseguidos
+        puts("Resposta incorreta! Você não garantiu prêmios Nessa rodada");
+        puts("\t\t\tVOCÊ É FRANGOLINO!!!\n"); // função para desenhar um frango se tiver tempo
         return 1;
     }
 }
