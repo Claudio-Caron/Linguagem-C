@@ -149,7 +149,7 @@ void certo()
 {
     printf("\t\t\t\tResposta correta!\n\t\t\t\tAguarde para prosseguir\n");
 }
-int p1(char *, int *);
+int p1(char perg[][], int *);
 {
     char r;
     do
