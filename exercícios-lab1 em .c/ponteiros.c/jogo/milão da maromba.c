@@ -17,7 +17,7 @@ int p1(char gaba, int x, char esppremios[][40], int z);
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
-    void preencher();
+    preencher();
     /*mensagem();
     system ("cls");*/
     escolha();
@@ -69,23 +69,22 @@ void escolha()
       9- D
       10-C*/
     char premios[10][40] = {
-        "1:Hiper Calórico",
-        "2:Omega 3",
-        "3:Caixa de barrinhas proteicas",
-        "4:Pasta de amendoim",
-        "5:Beta Alanina",
-        "6:Pre treino",
-        "7:Whey",
-        "8:Creatina",
-        "9:Um Mes de academia grátis",
-        "10:Um ano de farmacia gratis"}; //fazer um for do 0 ao premio da rodada menos um no else, com fito de imprimir todos os premios conseguidos no jogo;
+        "1:# Hiper Calórico",
+        "2:# Omega 3",
+        "3:# Caixa de barrinhas proteicas",
+        "4:# Pasta de amendoim",
+        "5:# Beta Alanina",
+        "6:# Pre treino",
+        "7:# Whey",
+        "8:# Creatina",
+        "9:# Um Mes de academia grátis",
+        "10:# Um ano de farmacia grátis"}; // fazer um for do 0 ao premio da rodada menos um no else, com fito de imprimir todos os premios conseguidos no jogo;
     do
     {
         switch (rodada)
         {
-        case 0: // inicia rodada 1, porém, utilizei o 0 para reciclar a variavel em outra função
-            mensrodada(rodada);
-            cont = p1(gabarito[0], rodada, premios, 0);//se não der certo, tentar jogar [] da matriz para cima e deixar como parametro em baixo so o nome da matriz; ou ainda fazer uma função somente para os premios;
+        case 0:                                         // inicia rodada 1, porém, utilizei o 0 para reciclar a variavel em outra função
+            cont = p1(gabarito[0], rodada, premios, 0); // se não der certo, tentar jogar [] da matriz para cima e deixar como parametro em baixo so o nome da matriz; ou ainda fazer uma função somente para os premios;
             break;
         case 1:
             cont = p1(gabarito[1], rodada, premios, 1);
@@ -120,7 +119,8 @@ void escolha()
 }
 void mensrodada(int esprodada)
 {
-    printf("\t\t\t\t\tRODADA %d\n Responda a pergunta corretamente e acumule prêmios!\n\n", esprodada+1);
+    printf("\t\t\t\t\t\t----------\n");
+    printf("\t\t\t\t\t\t|RODADA %d|\n\t\t\t\t\t\t----------\n Responda a pergunta corretamente e acumule prêmios!\n\n", esprodada + 1);
 }
 void certo()
 {
@@ -130,8 +130,8 @@ int p1(char gaba, int x, char esppremios[][40], int z)
 {
     char perguntas[11][200] = {
         "1- Qual é a finalidade do exercício \"rosca martelo\"?",
-        "2- Qual alimento e responsável por promover a vaso-dilatação nos treinos,       elevando a taxa de circulação sanguínea, irrigando os músculos com mais eficiência durante os treinos?",
-        "3- Qual alimento é reconhecido por retirar as câimbras, pela sua rica fonte de potássio, auxiliando na contração e recuperação muscular?",
+        "2- Qual alimento e responsável por promover a vaso-dilatação nos treinos, elevando a taxa de circulação sanguínea, irrigando os músculos com mais eficiência durante os treinos?",
+        "3- Qual alimento é reconhecido por retirar as câimbras, pela sua rica fonte de potássio, auxiliando na contração e recu-   peração muscular?",
         "4- O que significa \"PR\" em musculação?",
         "5- Qual termo é usado para descrever o processo de redução de gordura corporal para destacar a definição muscular?",
         "6- Qual é a técnica em que você realiza esforço na fase excêntrica do exercício, na falha muscular?",
@@ -144,14 +144,15 @@ int p1(char gaba, int x, char esppremios[][40], int z)
     // int x=0;//posisao do vetor da pergunta;(usar como parâmetro em chamarpergunta)
     do
     {
-        printf("%s", perguntas[x]);
-        for (i=0; i<4; i++)
+        mensrodada(x);
+        printf("%s\n", perguntas[x]);
+        for (i = 0; i < 4; i++)
         {
             printf("%s \n", perg[x][i]);
         }
         // funcao das alternativas
         scanf(" %c", &r);
-        stdin;
+        fflush (stdin);
         r = toupper(r);
         if (r != 'A' && r != 'B' && r != 'C' && r != 'D')
         {
@@ -160,7 +161,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             {
                 if (i == 3)
                 {
-                    Sleep(1500);
+                    Sleep(1000);
                 }
                 printf("%i   ", i);
                 Sleep(1000);
@@ -168,24 +169,30 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             system("cls");
         }
     } while (r != 'A' && r != 'B' && r != 'C' && r != 'D'); // alterar a condição no momento que for implementado ajudas.
-    if (x==8){
-        r='D';
+    if (x == 8)
+    {
+        r = 'D';
     }
     if (r == gaba)
     {
         certo();
-        printf ("Premio obtido na rodada: %s\n", esppremios[z]);   // usar vetor para os premios tentar local ou global
-        Sleep(3500);
+        printf("Premio obtido na rodada %s\n", esppremios[z]); // usar vetor para os premios tentar local ou global
+        Sleep(4000);
         system("cls");
         return 0;
     }
     else
     {
-        //fazer um for para mostrar os premios conseguidos
-        puts("Resposta incorreta! Você não garantiu prêmios Nessa rodada");
+        // fazer um for para mostrar os premios conseguidos
+        puts("\t\t\t\t--------------------");
+        puts("\t\t\t\t|RESPOSTA INCORRETA!|");
+        puts("\t\t\t\t--------------------");
+        puts("Você não garantiu prêmios Nessa rodada!!!");
         puts("\t\t\tVOCÊ É FRANGOLINO!!!\n"); // função para desenhar um frango se tiver tempo
-        Sleep(3500);
-        system ("cls");
+        puts("Jogo encerrado, prêmios acumulados:\n");
+        for (i=0; 0<x; i++){
+            printf ("%s\n", esppremios[i]);
+        }
         return 1;
     }
 }
