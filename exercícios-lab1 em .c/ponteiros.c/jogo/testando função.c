@@ -5,7 +5,7 @@ int main()
     char x;
     printf ("insira a letra\n");
     /*scanf ("%c", &x);*/
-    fgets ("x",1,stdin);
+    x= fgetc (stdin);
     printf ("caractere inserido: %c\n", x);
     /* code */
     system ("pause");
