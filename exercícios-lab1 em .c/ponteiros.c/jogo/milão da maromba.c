@@ -64,7 +64,6 @@ void escolha()
 {
     int cont = 0, rodada = 0;
     char gabarito[11] = "BBCDCDDDDC";
-    char premios[11][]
     /*1- B
       2- B
       3- C
@@ -75,12 +74,23 @@ void escolha()
       8- D
       9- D
       10-C*/
+    char premios[10][40] = {
+        "1-Hiper Calórico",
+        "2-Omega 3",
+        "3-Caixa de barrinhas proteicas",
+        "4-Pasta de amendoim",
+        "5-Beta Alanina",
+        "6-Pre treino",
+        "7-Whey",
+        "8-Creatina",
+        "9-Um Mes de academia grátis",
+        "10-Um ano de farmacia gratis"}; //fazer um for do 0 ao premio da rodada menos um no else, com fito de imprimir todos os premios conseguidos no jogo;
     do
     {
         switch (rodada)
         {
         case 0: // inicia rodada 1, porém, utilizei o 0 para reciclar a variavel em outra função
-            cont = p1(gabarito[0], rodada);
+            cont = p1(gabarito[0], rodada, premios[]);
             break;
         case 1:
             cont = p1(gabarito[1], rodada);
@@ -166,7 +176,7 @@ int p1(char gaba, int x)
     if (r == gaba)
     {
         certo();
-        printf("Premio da rodada: 1 hiper calor\n");//usar vetor para os premios tentar local ou global
+        printf("Premio da rodada: 1 hiper calor\n"); // usar vetor para os premios tentar local ou global
         sleep(2000);
         system("cls");
         return 0;
