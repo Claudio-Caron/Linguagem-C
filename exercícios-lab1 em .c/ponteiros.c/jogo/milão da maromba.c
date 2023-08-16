@@ -18,6 +18,8 @@ int main()
 {
     setlocale(LC_ALL, "Portuguese");
     void preencher();
+    /*mensagem();
+    system ("cls");*/
     escolha();
     system("pause");
     return 0;
@@ -67,16 +69,16 @@ void escolha()
       9- D
       10-C*/
     char premios[10][40] = {
-        "1-Hiper Calórico",
-        "2-Omega 3",
-        "3-Caixa de barrinhas proteicas",
-        "4-Pasta de amendoim",
-        "5-Beta Alanina",
-        "6-Pre treino",
-        "7-Whey",
-        "8-Creatina",
-        "9-Um Mes de academia grátis",
-        "10-Um ano de farmacia gratis"}; //fazer um for do 0 ao premio da rodada menos um no else, com fito de imprimir todos os premios conseguidos no jogo;
+        "1:Hiper Calórico",
+        "2:Omega 3",
+        "3:Caixa de barrinhas proteicas",
+        "4:Pasta de amendoim",
+        "5:Beta Alanina",
+        "6:Pre treino",
+        "7:Whey",
+        "8:Creatina",
+        "9:Um Mes de academia grátis",
+        "10:Um ano de farmacia gratis"}; //fazer um for do 0 ao premio da rodada menos um no else, com fito de imprimir todos os premios conseguidos no jogo;
     do
     {
         switch (rodada)
@@ -114,11 +116,11 @@ void escolha()
             break;
         }
         rodada++;
-    } while (cont == 0 || rodada <= 9);
+    } while (cont == 0 && rodada <= 9);
 }
 void mensrodada(int esprodada)
 {
-    printf("\t\t\tRodada %d, Responda a pergunta corretamente e acumule prêmios!\n", esprodada+1);
+    printf("\t\t\t\t\tRODADA %d\n Responda a pergunta corretamente e acumule prêmios!\n\n", esprodada+1);
 }
 void certo()
 {
@@ -128,7 +130,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
 {
     char perguntas[11][200] = {
         "1- Qual é a finalidade do exercício \"rosca martelo\"?",
-        "2- Qual alimento e responsável por promover a vaso-dilatação nos treinos,elevando a taxa de circulação sanguínea, irrigando os músculos com mais eficiência durante os treinos?",
+        "2- Qual alimento e responsável por promover a vaso-dilatação nos treinos,       elevando a taxa de circulação sanguínea, irrigando os músculos com mais eficiência durante os treinos?",
         "3- Qual alimento é reconhecido por retirar as câimbras, pela sua rica fonte de potássio, auxiliando na contração e recuperação muscular?",
         "4- O que significa \"PR\" em musculação?",
         "5- Qual termo é usado para descrever o processo de redução de gordura corporal para destacar a definição muscular?",
@@ -143,34 +145,37 @@ int p1(char gaba, int x, char esppremios[][40], int z)
     do
     {
         printf("%s", perguntas[x]);
-        for (i = 0; i < 4; i++)
+        for (i=0; i<4; i++)
         {
-            printf("%s\n", perg[x][i]);
+            printf("%s \n", perg[x][i]);
         }
         // funcao das alternativas
-        scanf("%c", &r);
+        scanf(" %c", &r);
         stdin;
         r = toupper(r);
-        if (r != 'A' || r != 'B' || r != 'C' || r != 'D')
+        if (r != 'A' && r != 'B' && r != 'C' && r != 'D')
         {
             printf("Você digitou uma opção inválida, insira novamente a alternativa em :");
             for (i = 3; i > 0; i--)
             {
                 if (i == 3)
                 {
-                    Sleep(3000);
+                    Sleep(1500);
                 }
                 printf("%i   ", i);
                 Sleep(1000);
             }
             system("cls");
         }
-    } while (r != 'A' || r != 'B' || r != 'C' || r != 'D'); // alterar a condição no momento que for implementado ajudas.
+    } while (r != 'A' && r != 'B' && r != 'C' && r != 'D'); // alterar a condição no momento que for implementado ajudas.
+    if (x==8){
+        r='D';
+    }
     if (r == gaba)
     {
         certo();
         printf ("Premio obtido na rodada: %s\n", esppremios[z]);   // usar vetor para os premios tentar local ou global
-        Sleep(2000);
+        Sleep(3500);
         system("cls");
         return 0;
     }
@@ -179,6 +184,8 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         //fazer um for para mostrar os premios conseguidos
         puts("Resposta incorreta! Você não garantiu prêmios Nessa rodada");
         puts("\t\t\tVOCÊ É FRANGOLINO!!!\n"); // função para desenhar um frango se tiver tempo
+        Sleep(3500);
+        system ("cls");
         return 1;
     }
 }
