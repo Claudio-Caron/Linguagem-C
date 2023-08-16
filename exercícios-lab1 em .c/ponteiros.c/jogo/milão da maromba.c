@@ -17,9 +17,9 @@ int p1(char gaba, int x, char esppremios[][40], int z);
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
+    mensagem();
     preencher();
-    /*mensagem();
-    system ("cls");*/
+    system("cls");
     escolha();
     system("pause");
     return 0;
@@ -58,23 +58,13 @@ void escolha()
 {
     int cont = 0, rodada = 0;
     char gabarito[11] = "BBCDCDDDDC";
-    /*1- B
-      2- B
-      3- C
-      4- D
-      5- C
-      6- D
-      7- D
-      8- D
-      9- D
-      10-C*/
     char premios[10][40] = {
         "1:# Hiper Calórico",
         "2:# Omega 3",
         "3:# Caixa de barrinhas proteicas",
         "4:# Pasta de amendoim",
         "5:# Beta Alanina",
-        "6:# Pre treino",
+        "6:# Pré-treino",
         "7:# Whey",
         "8:# Creatina",
         "9:# Um Mes de academia grátis",
@@ -124,13 +114,13 @@ void mensrodada(int esprodada)
 }
 void certo()
 {
-    printf("\t\t\t\tResposta correta!\n\t\t\t\tAguarde para prosseguir\n");
+    printf("\t\t\t\tResposta correta!\n\t\t\t\tAguarde para prosseguir\n\n");
 }
 int p1(char gaba, int x, char esppremios[][40], int z)
 {
     char perguntas[11][200] = {
         "1- Qual é a finalidade do exercício \"rosca martelo\"?",
-        "2- Qual alimento e responsável por promover a vaso-dilatação nos treinos, elevando a taxa de circulação sanguínea, irrigando os músculos com mais eficiência durante os treinos?",
+        "2- Qual alimento e responsável por promover a vaso-dilatação nos treinos, elevando a taxa de circulação sanguínea,      irrigando os músculos com mais eficiência durante os treinos?",
         "3- Qual alimento é reconhecido por retirar as câimbras, pela sua rica fonte de potássio, auxiliando na contração e recu-   peração muscular?",
         "4- O que significa \"PR\" em musculação?",
         "5- Qual termo é usado para descrever o processo de redução de gordura corporal para destacar a definição muscular?",
@@ -140,83 +130,150 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         "9- Professor é Fake-Natty?",
         "10- O que é o \"overtraining\" e por que é importante evitá-lo?"};
     char r;
-    int i;
+    int i, y=0;
     // int x=0;//posisao do vetor da pergunta;(usar como parâmetro em chamarpergunta)
     do
     {
-        mensrodada(x);
-        printf("%s\n", perguntas[x]);
-        for (i = 0; i < 4; i++)
+        do
         {
-            printf("%s \n", perg[x][i]);
-        }
-        // funcao das alternativas
-        scanf(" %c", &r);
-        fflush (stdin);
-        r = toupper(r);
-        if (r != 'A' && r != 'B' && r != 'C' && r != 'D')
-        {
-            printf("Você digitou uma opção inválida, insira novamente a alternativa em :");
-            for (i = 3; i > 0; i--)
+            mensrodada(x);
+            printf("Para remover duas alternativas, digite 1\nPara solicitar uma dica da questão, digite 2(ou opte por responder a questão)\n");
+            // printf ("AJUDAS RESTANTES: %d\nELIMINAÇÕES RESTANTES: %d\n\n", x, x);
+            printf("%s\n", perguntas[x]);
+            for (i = 0; i < 4; i++)
             {
-                if (i == 3)
+                printf("%s \n", perg[x][i]);
+            }
+            // funcao das alternativas
+            scanf(" %c", &r);
+            fflush(stdin);
+            r = toupper(r);
+            if (r != 'A' && r != 'B' && r != 'C' && r != 'D' && r != '1' && r != '2')
+            {
+                printf("Você digitou uma opção inválida, insira novamente a alternativa em :");
+                for (i = 3; i > 0; i--)
                 {
+                    if (i == 3)
+                    {
+                        Sleep(1000);
+                    }
+                    printf("%i   ", i);
                     Sleep(1000);
                 }
-                printf("%i   ", i);
-                Sleep(1000);
+                system("cls");
+            }
+        } while (r != 'A' && r != 'B' && r != 'C' && r != 'D' && r != '1' && r != '2'); // alterar a condição no momento que for implementado ajudas.
+        if (x == 8)
+        {
+            r = 'D';
+        }
+        if (r == gaba)
+        {
+            certo();
+            printf("Premio obtido na rodada %s\n", esppremios[z]); // usar vetor para os premios tentar local ou global
+            Sleep(4000);
+            system("cls");
+            return 0;
+        }
+        else if (r == '1')
+        {
+            // da para transformar numa função com ponteiro x;
+            switch (x)
+            {
+            case 0:
+                strcpy(perg[0][0], "A)");
+                strcpy(perg[0][2], "C)");
+                break;
+            case 1:
+                strcpy(perg[1][0], "A)");
+                strcpy(perg[1][3], "D)");
+                break;
+            case 2:
+                strcpy(perg[2][1], "B)");
+                strcpy(perg[2][0], "A)");
+                break;
+            case 3:
+                strcpy(perg[3][1], "B)");
+                strcpy(perg[3][2], "C)");
+                break;
+            case 4:
+                strcpy(perg[4][3], "D)");
+                strcpy(perg[4][0], "A)");
+                break;
+            case 5:
+                strcpy(perg[5][1], "B)");
+                strcpy(perg[5][0], "A)");
+                break;
+            case 6:
+                strcpy(perg[6][1], "B)");
+                strcpy(perg[6][2], "C)");
+                break;
+            case 7:
+                strcpy(perg[7][0], "A)");
+                strcpy(perg[7][1], "B)");
+                break;
+            case 8:
+                strcpy(perg[8][0], "A)");
+                strcpy(perg[8][1], "B)");
+                break;
+            case 9:
+                strcpy(perg[9][0], "A)");
+                strcpy(perg[9][3], "D)");
+                break;
             }
             system("cls");
+            continue;
         }
-    } while (r != 'A' && r != 'B' && r != 'C' && r != 'D'); // alterar a condição no momento que for implementado ajudas.
-    if (x == 8)
-    {
-        r = 'D';
-    }
-    if (r == gaba)
-    {
-        certo();
-        printf("Premio obtido na rodada %s\n", esppremios[z]); // usar vetor para os premios tentar local ou global
-        Sleep(4000);
-        system("cls");
-        return 0;
-    }
-    else
-    {
-        // fazer um for para mostrar os premios conseguidos
-        puts("\t\t\t\t--------------------");
-        puts("\t\t\t\t|RESPOSTA INCORRETA!|");
-        puts("\t\t\t\t--------------------");
-        puts("Você não garantiu prêmios Nessa rodada!!!");
-        puts("\t\t\tVOCÊ É FRANGOLINO!!!\n"); // função para desenhar um frango se tiver tempo
-        puts("Jogo encerrado, prêmios acumulados:\n");
-        for (i=0; 0<x; i++){
-            printf ("%s\n", esppremios[i]);
+        else
+        {
+            // transformar essa galinha em uma função
+            //  fazer um for para mostrar os premios conseguidos
+            printf("            ,~.\n");
+            printf("           ,-'__ `-,\n");
+            printf("          {,-'  `. }\n");
+            printf("         ,( ° )   `-.__\n");
+            printf("        <=.) (         `-.__,==' ' ' '} \t\t---------------------\n");
+            printf("          (   )                      /) \t\t|RESPOSTA INCORRETA!|\n");
+            printf("           `-'\\  ,                    )\t\t\t---------------------\n");
+            printf("               |  \\        `~.        /\n");
+            printf("               \\   `._        \\      /\n");
+            printf("                \\     `._____,'    ,'\n");
+            printf("                 `-.             ,-'\n");
+            printf("                    `-._     _,-'\n");
+            printf("                        77jj'\n");
+            printf("                       //_||\n");
+            printf("                    __//--'/`\n");
+            printf("                  ,--'/`  '\n");
+            puts("Você não garantiu prêmios Nessa rodada!!!");
+            puts("\t\t\tVOCÊ É FRANGOLINO!!!\n");
+            printf("\t\t\t       \\   \n");
+            printf("\t\t\t       (o>  \n");
+            printf("\t\t\t\\ \\  / ) \n");
+            printf("\t\t\t\\ `)   )    \n");
+            printf("\t\t\t /  /__/   \n");
+            printf("\t\t\t/   / \n");
+            if (x == 0)
+            {
+                printf("\t\t\t-------------------------------------------\n");
+                printf("\t\t\t|Jogo encerrado, você não conseguiu prêmios|\n");
+                printf("\t\t\t--------------------------------------------\n");
+                return 1;
+            }
+            printf("\t\t\t-------------------------------------\n");
+            printf("\t\t\t|Jogo encerrado, prêmios acumulados:|\n");
+            printf("\t\t\t-------------------------------------\n");
+            for (z = 0; z < x; z++)
+            {
+                printf("\t\t\t%s\n", esppremios[z]);
+            }
+            return 1;
         }
-        return 1;
-    }
+    }while (y == 0);
 }
-/*int p2(char *, int *);
-{
-    char r;
-    do
-    {
-        printf("\n");
-        scanf("%c", &r);
-        stdin;
-        r = toupper(r);
-    } while (r != 'A' && r != 'B' && r != 'C' && r != 'D'); // alterar a condição no momento que for implementado ajudas.
-    if (r==//x){
-        certo();
-        printf ("Premio da rodada:1 Hiper calórico.\n");
-        system ("cls");
-        sleep (2000);
-        return=0;
-}*/
 void preencher()
 {
-    strcpy(perg[0][0], "A) Trabalhar de maneira isolada o biceps.");
-    strcpy(perg[0][1], "B) Dar enfase na porcao  do biceps braquial, com sinergismo(movimento auxiliar) do ante-braço.");
+    strcpy(perg[0][0], "A) Trabalhar de maneira isolada o bíceps.");
+    strcpy(perg[0][1], "B) Dar ênfase na porcao  do bíceps braquial, com sinergismo(movimento auxiliar) do ante-braço.");
     strcpy(perg[0][2], "C) Como o exercicio e realizado em uma pegada neutra, trabalha isoladamente a cabeça curta do biceps.");
     strcpy(perg[0][3], "D) trabalhar de maneira isolada o ante-braço.");
     strcpy(perg[1][0], "A)Cenoura.");
@@ -233,26 +290,26 @@ void preencher()
     strcpy(perg[3][3], "D)Personal Record (Recorde Pessoal).");
     strcpy(perg[4][0], "A)Hipertrofia.");
     strcpy(perg[4][1], "B)Bulking.");
-    strcpy(perg[4][2], "C)Cutting.");
+    strcpy(perg[4][2], "C)Cutting."); //
     strcpy(perg[4][3], "D)Endurance.");
     strcpy(perg[5][0], "A)Isometria.");
     strcpy(perg[5][1], "B)Plyometria.");
     strcpy(perg[5][2], "C)Repetições parciais");
-    strcpy(perg[5][3], "D)Série negativa");
+    strcpy(perg[5][3], "D)Série negativa"); //
     strcpy(perg[6][0], "A)Acelerar o metabolismo.");
     strcpy(perg[6][1], "B)Fornecer fibras para a digestão.");
     strcpy(perg[6][2], "C)Apoiar o crescimento dos ossos.");
-    strcpy(perg[6][3], "D)Regular hormônios e fornecer energia.");
+    strcpy(perg[6][3], "D)Regular hormônios e fornecer energia."); //
     strcpy(perg[7][0], "A)Reduzir a necessidade de aquecimento.");
     strcpy(perg[7][1], "B)Evitar o ganho excessivo de massa muscular.");
     strcpy(perg[7][2], "C)Prevenir lesões articulares.");
-    strcpy(perg[7][3], "D)Maximizar os ganhos de força e massa muscular.");
-    strcpy(perg[8][0], "A)Sim.");
-    strcpy(perg[8][1], "B)Com certeza.");
-    strcpy(perg[8][2], "C)Sem dúvidas.");
-    strcpy(perg[8][3], "D)Inquestionavelmente.");
+    strcpy(perg[7][3], "D)Maximizar os ganhos de força e massa muscular."); //
+    strcpy(perg[8][0], "A)Sim.");                                           //
+    strcpy(perg[8][1], "B)Com certeza.");                                   //
+    strcpy(perg[8][2], "C)Sem dúvidas.");                                   //
+    strcpy(perg[8][3], "D)Inquestionavelmente.");                           //
     strcpy(perg[9][0], "A)Um estado de relaxamento muscular excessivo.");
     strcpy(perg[9][1], "B)Um período de tempo dedicado exclusivamente à recuperação.");
-    strcpy(perg[9][2], "C)Estresse corporal de treinamento muito alto sem descanso adequado, o que pode levar a fadiga crônica, lesões e redução no desempenho.");
+    strcpy(perg[9][2], "C)Estresse corporal de treinamento muito alto sem descanso adequado, o que pode levar a fadiga crônica, lesões e redução no desempenho."); //
     strcpy(perg[9][3], "D)Uma técnica avançada de treinamento para maximizar ganhos de força rapidamente.");
 }
