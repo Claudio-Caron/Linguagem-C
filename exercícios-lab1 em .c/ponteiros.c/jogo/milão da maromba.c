@@ -18,7 +18,7 @@ int p1(char gaba, int x, char esppremios[][40], int z);
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
-    mensagem();
+    /*mensagem();*/
     preencher();
     system("cls");
     escolha();
@@ -112,6 +112,13 @@ void mensrodada(int esprodada)
 {
     printf("\t\t\t\t\t\t----------\n");
     printf("\t\t\t\t\t\t|RODADA %d|\n\t\t\t\t\t\t----------\n Responda a pergunta corretamente e acumule prêmios!\n\n", esprodada + 1);
+    printf("/--------------------------------------------\\\n");
+    printf("|Para remover duas alternativas, digite 1    |\n");
+    printf("|--------------------------------------------|\n");
+    printf("|Para solicitar uma dica da questão, digite 2|\n");
+    printf("|--------------------------------------------|\n");
+    printf("|(ou opte por responder a questão)           |\n");
+    printf("\\--------------------------------------------/\n");
 }
 void certo()
 {
@@ -131,15 +138,14 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         "9- Professor é Fake-Natty?",
         "10- O que é o \"overtraining\" e por que é importante evitá-lo?"};
     char r;
-    int i, y = 0, vremov = 2, vdica = 2, vpula = 2;
+    int i, y = 0, vremov = 2, vdica = 2, vpula = 2, contaj=0;
     // int x=0;//posisao do vetor da pergunta;(usar como parâmetro em chamarpergunta)
     do
     {
         do
         {
             mensrodada(x);
-            printf("Para remover duas alternativas, digite 1\nPara solicitar uma dica da questão, digite 2(ou opte por responder a questão)\n");
-            printf("DICAS RESTANTES: %i\nREMOÇÕES RESTANTES: %i\nSALTO RESTANTE: %i\n", vdica, vremov, vpula);
+            printf("DICAS RESTANTES: %d\nREMOÇÕES RESTANTES: %d\nSALTO RESTANTE: %d\n\n", vdica, vremov, vpula);
             printf("%s\n", perguntas[x]);
             for (i = 0; i < 4; i++)
             {
@@ -176,9 +182,17 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             system("cls");
             return 0;
         }
-        else if (r == '1' && vremov < 2)
+        else if (r == '1' && vremov > 0)
         {
+
+            if (contaj!=0){
+                printf ("Você já removeu uma alternativa nessa rodada!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+                vremov++;
+                Sleep (3000);
+                system ("cls");
+            }
             vremov--;
+            contaj++;
             // da para transformar numa função com ponteiro x;
             switch (x)
             {
@@ -226,9 +240,17 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             system("cls");
             continue;
         }
+        else if (r == '1' && vremov == 0)
+        {
+            printf("Você esgotou todas as remoções\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+            Sleep(3000);
+            system("cls");
+            continue;
+        }
         else
         {
-            galinha(); // transformar essa galinha em uma função
+            printf ("Alternativa correta: %c\n", gaba);
+            galinha();// transformar essa galinha em uma função
             //  fazer um for para mostrar os premios conseguidos
             if (x == 0)
             {
