@@ -13,6 +13,7 @@ void pergunta();
 void escolha();
 void certo();
 void mensagem();
+void galinha();
 int p1(char gaba, int x, char esppremios[][40], int z);
 int main()
 {
@@ -130,7 +131,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         "9- Professor é Fake-Natty?",
         "10- O que é o \"overtraining\" e por que é importante evitá-lo?"};
     char r;
-    int i, y=0;
+    int i, y = 0, vremov = 2, vdica = 2, vpula = 2;
     // int x=0;//posisao do vetor da pergunta;(usar como parâmetro em chamarpergunta)
     do
     {
@@ -138,7 +139,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         {
             mensrodada(x);
             printf("Para remover duas alternativas, digite 1\nPara solicitar uma dica da questão, digite 2(ou opte por responder a questão)\n");
-            // printf ("AJUDAS RESTANTES: %d\nELIMINAÇÕES RESTANTES: %d\n\n", x, x);
+            printf("DICAS RESTANTES: %i\nREMOÇÕES RESTANTES: %i\nSALTO RESTANTE: %i\n", vdica, vremov, vpula);
             printf("%s\n", perguntas[x]);
             for (i = 0; i < 4; i++)
             {
@@ -175,8 +176,9 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             system("cls");
             return 0;
         }
-        else if (r == '1')
+        else if (r == '1' && vremov < 2)
         {
+            vremov--;
             // da para transformar numa função com ponteiro x;
             switch (x)
             {
@@ -226,32 +228,8 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         }
         else
         {
-            // transformar essa galinha em uma função
+            galinha(); // transformar essa galinha em uma função
             //  fazer um for para mostrar os premios conseguidos
-            printf("            ,~.\n");
-            printf("           ,-'__ `-,\n");
-            printf("          {,-'  `. }\n");
-            printf("         ,( ° )   `-.__\n");
-            printf("        <=.) (         `-.__,==' ' ' '} \t\t---------------------\n");
-            printf("          (   )                      /) \t\t|RESPOSTA INCORRETA!|\n");
-            printf("           `-'\\  ,                    )\t\t\t---------------------\n");
-            printf("               |  \\        `~.        /\n");
-            printf("               \\   `._        \\      /\n");
-            printf("                \\     `._____,'    ,'\n");
-            printf("                 `-.             ,-'\n");
-            printf("                    `-._     _,-'\n");
-            printf("                        77jj'\n");
-            printf("                       //_||\n");
-            printf("                    __//--'/`\n");
-            printf("                  ,--'/`  '\n");
-            puts("Você não garantiu prêmios Nessa rodada!!!");
-            puts("\t\t\tVOCÊ É FRANGOLINO!!!\n");
-            printf("\t\t\t       \\   \n");
-            printf("\t\t\t       (o>  \n");
-            printf("\t\t\t\\ \\  / ) \n");
-            printf("\t\t\t\\ `)   )    \n");
-            printf("\t\t\t /  /__/   \n");
-            printf("\t\t\t/   / \n");
             if (x == 0)
             {
                 printf("\t\t\t-------------------------------------------\n");
@@ -268,7 +246,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             }
             return 1;
         }
-    }while (y == 0);
+    } while (y == 0);
 }
 void preencher()
 {
@@ -312,4 +290,31 @@ void preencher()
     strcpy(perg[9][1], "B)Um período de tempo dedicado exclusivamente à recuperação.");
     strcpy(perg[9][2], "C)Estresse corporal de treinamento muito alto sem descanso adequado, o que pode levar a fadiga crônica, lesões e redução no desempenho."); //
     strcpy(perg[9][3], "D)Uma técnica avançada de treinamento para maximizar ganhos de força rapidamente.");
+}
+void galinha()
+{
+    printf("            ,~.\n");
+    printf("           ,-'__ `-,\n");
+    printf("          {,-'  `. }\n");
+    printf("         ,( ° )   `-.__\n");
+    printf("        <=.) (         `-.__,==' ' ' '} \t\t---------------------\n");
+    printf("          (   )                      /) \t\t|RESPOSTA INCORRETA!|\n");
+    printf("           `-'\\  ,                    )\t\t\t---------------------\n");
+    printf("               |  \\        `~.        /\n");
+    printf("               \\   `._        \\      /\n");
+    printf("                \\     `._____,'    ,'\n");
+    printf("                 `-.             ,-'\n");
+    printf("                    `-._     _,-'\n");
+    printf("                        77jj'\n");
+    printf("                       //_||\n");
+    printf("                    __//--'/`\n");
+    printf("                  ,--'/`  '\n");
+    puts("Você não garantiu prêmios Nessa rodada!!!");
+    puts("\t\t\tVOCÊ É FRANGOLINO!!!\n");
+    printf("\t\t\t       \\   \n");
+    printf("\t\t\t       (o>  \n");
+    printf("\t\t\t\\ \\  / ) \n");
+    printf("\t\t\t\\ `)   )    \n");
+    printf("\t\t\t /  /__/   \n");
+    printf("\t\t\t/   / \n");
 }
