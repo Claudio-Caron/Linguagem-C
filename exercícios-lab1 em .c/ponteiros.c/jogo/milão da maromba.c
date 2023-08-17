@@ -14,6 +14,7 @@ void escolha();
 void certo();
 void mensagem();
 void galinha();
+void dica(int *espx);
 int p1(char gaba, int x, char esppremios[][40], int z);
 int main()
 {
@@ -138,7 +139,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         "9- Professor é Fake-Natty?",
         "10- O que é o \"overtraining\" e por que é importante evitá-lo?"};
     char r;
-    int i, y = 0, vremov = 2, vdica = 2, vpula = 2, contaj=0;//usar ponteiro para declarar essas variáveis no bloco do escolha;Se não der certo, declarar como globais, mas vai dar certo sim, confia
+    int i, y = 0, vremov = 2, vdica = 2, vpula = 2, contaj = 0; // usar ponteiro para declarar essas variáveis no bloco do escolha;Se não der certo, declarar como globais, mas vai dar certo sim, confia
     // int x=0;//posisao do vetor da pergunta;(usar como parâmetro em chamarpergunta)
     do
     {
@@ -174,6 +175,24 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         {
             r = 'D';
         }
+        if (r == '2')
+        {
+            if (vdica > 0)
+            {
+                vdica--;
+                system("cls");
+                dica(&x);
+                continue;
+            }
+            else if (vdica == 0)
+            {
+                printf("Você já utilizou dicas nessa rodada!!!RESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+                Sleep(3000);
+                system("cls");
+                dica(&x);
+                continue;
+            }
+        }
         if (r == gaba)
         {
             certo();
@@ -185,11 +204,12 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         else if (r == '1' && vremov > 0)
         {
 
-            if (contaj!=0){
-                printf ("Você já removeu uma alternativa nessa rodada!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+            if (contaj != 0)
+            {
+                printf("Você já removeu uma alternativa nessa rodada!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
                 vremov++;
-                Sleep (3000);
-                system ("cls");
+                Sleep(3000);
+                system("cls");
             }
             vremov--;
             contaj++;
@@ -249,8 +269,8 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         }
         else
         {
-            printf ("Alternativa correta: %c\n", gaba);
-            galinha();// transformar essa galinha em uma função
+            printf("Alternativa correta: %c\n", gaba);
+            galinha(); // transformar essa galinha em uma função
             //  fazer um for para mostrar os premios conseguidos
             if (x == 0)
             {
@@ -340,3 +360,18 @@ void galinha()
     printf("\t\t\t /  /__/   \n");
     printf("\t\t\t/   / \n");
 }
+void dica(int *espx)
+{
+    char *dicas[] = {
+        "1 Dicas: Esse exercício é realizado com movimento em sentido ao peito.",
+        "2 Dicas: Sua origem permite que seja produzida açúcar de seus nutrientes.",
+        "3 DICAS: É um alimento associado aos macacos.",
+        "4 Dica: É dito ao levantar um peso que nunca levantou antes.",
+        "5 DICA: défict calórico.",
+        "6 Dica: Fase em que segura a descida.",
+        "7 DICAS: Lubrifica os ossos, mas também auxilia na produção de algo que garante o funcionamento do organismo.",
+        "8 DICAS: Melhorar a performance.",
+        "9 Dicas: Observe o peitoral dele!",
+        "10 Dicas: (sobretreinamento)."};
+    printf("Dica: %s\n", dicas[*espx]);
+} // ultima alteracao;
