@@ -138,7 +138,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         "9- Professor é Fake-Natty?",
         "10- O que é o \"overtraining\" e por que é importante evitá-lo?"};
     char r;
-    int i, y = 0, vremov = 2, vdica = 2, vpula = 2, contaj=0;
+    int i, y = 0, vremov = 2, vdica = 2, vpula = 2, contaj=0;//usar ponteiro para declarar essas variáveis no bloco do escolha;Se não der certo, declarar como globais, mas vai dar certo sim, confia
     // int x=0;//posisao do vetor da pergunta;(usar como parâmetro em chamarpergunta)
     do
     {
