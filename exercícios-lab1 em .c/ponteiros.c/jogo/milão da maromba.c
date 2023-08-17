@@ -15,11 +15,12 @@ void certo();
 void mensagem();
 void galinha();
 void dica(int *espx);
+int remov = 2, numdica = 2, pula = 1;
 int p1(char gaba, int x, char esppremios[][40], int z);
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
-    /*mensagem();*/
+    mensagem();
     preencher();
     system("cls");
     escolha();
@@ -118,7 +119,7 @@ void mensrodada(int esprodada)
     printf("|--------------------------------------------|\n");
     printf("|Para solicitar uma dica da questão, digite 2|\n");
     printf("|--------------------------------------------|\n");
-    printf("|(ou opte por responder a questão)           |\n");
+    printf("|Para saltar a pergunta, digite 3            |\n");
     printf("\\--------------------------------------------/\n");
 }
 void certo()
@@ -139,24 +140,27 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         "9- Professor é Fake-Natty?",
         "10- O que é o \"overtraining\" e por que é importante evitá-lo?"};
     char r;
-    int i, y = 0, vremov = 2, vdica = 2, vpula = 2, contaj = 0; // usar ponteiro para declarar essas variáveis no bloco do escolha;Se não der certo, declarar como globais, mas vai dar certo sim, confia
+    int i, y = 0, contaj = 0, contdica = 0; // usar ponteiro para declarar essas variáveis no bloco do escolha;Se não der certo, declarar como globais, mas vai dar certo sim, confia
     // int x=0;//posisao do vetor da pergunta;(usar como parâmetro em chamarpergunta)
     do
     {
         do
         {
             mensrodada(x);
-            printf("DICAS RESTANTES: %d\nREMOÇÕES RESTANTES: %d\nSALTO RESTANTE: %d\n\n", vdica, vremov, vpula);
+            printf("REMOÇÕES RESTANTES: %d\nDICAS RESTANTES: %d\nSALTO RESTANTE: %d\n\n", remov, numdica, pula);
             printf("%s\n", perguntas[x]);
             for (i = 0; i < 4; i++)
             {
                 printf("%s \n", perg[x][i]);
             }
+            printf("\t\t\t------------------------------------------------------\n");
+            printf("\t\t\t|Insira a alternativa ou solicite um recurso de ajuda|\n");
+            printf("\t\t\t------------------------------------------------------\n\t\t\t\t\t      ");
             // funcao das alternativas
             scanf(" %c", &r);
             fflush(stdin);
             r = toupper(r);
-            if (r != 'A' && r != 'B' && r != 'C' && r != 'D' && r != '1' && r != '2')
+            if (r != 'A' && r != 'B' && r != 'C' && r != 'D' && r != '1' && r != '2' && r != '3')
             {
                 printf("Você digitou uma opção inválida, insira novamente a alternativa em :");
                 for (i = 3; i > 0; i--)
@@ -170,26 +174,70 @@ int p1(char gaba, int x, char esppremios[][40], int z)
                 }
                 system("cls");
             }
-        } while (r != 'A' && r != 'B' && r != 'C' && r != 'D' && r != '1' && r != '2'); // alterar a condição no momento que for implementado ajudas.
-        if (x == 8)
+        } while (r != 'A' && r != 'B' && r != 'C' && r != 'D' && r != '1' && r != '2' && r != '3'); // alterar a condição no momento que for implementado ajudas.
+        if (r == '3' && pula > 0)
         {
-            r = 'D';
+            pula--;
+            printf("\t\t\t\tVocê saltou essa pergunta!!!\n\n");
+            Sleep(3000);
+            system("cls");
+            return 0;
         }
-        if (r == '2')
+        else if (r == '3' && pula == 0)
         {
-            if (vdica > 0)
+            printf("\t\t\t\tVocê já usou o recurso de pular");
+            if (contdica != 0)
             {
-                vdica--;
+                Sleep(3000);
                 system("cls");
                 dica(&x);
                 continue;
             }
-            else if (vdica == 0)
+            Sleep(3000);
+            system("cls");
+            continue;
+        }
+        if (x == 8)
+        {
+            if (r == 'A' || r == 'B' || r == 'C')
             {
-                printf("Você já utilizou dicas nessa rodada!!!RESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+                r = 'D';
+            }
+        }
+        if (r == '2')
+        {
+            if (numdica > 0)
+            {
+                if (numdica == 1 && contdica != 0)
+                {
+                    printf("Você já solicitou dicas nessa rodada!!!RESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+                    Sleep(3000);
+                    system("cls");
+                    dica(&x);
+                    continue;
+                }
+                if (numdica == 2 && contdica == 0)
+                {
+                    numdica--;
+                    contdica++;
+                    system("cls");
+                    dica(&x);
+                    continue;
+                }
+                else if (numdica == 1 && contdica == 0)
+                {
+                    numdica--;
+                    system("cls");
+                    dica(&x);
+                    continue;
+                }
+            }
+            else if (numdica == 0)
+            {
+                printf("Você não possui mais dicas disponíveis!!!RESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
                 Sleep(3000);
                 system("cls");
-                dica(&x);
+                // dica(&x);
                 continue;
             }
         }
@@ -201,17 +249,17 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             system("cls");
             return 0;
         }
-        else if (r == '1' && vremov > 0)
+        else if (r == '1' && remov > 0)
         {
 
             if (contaj != 0)
             {
                 printf("Você já removeu uma alternativa nessa rodada!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
-                vremov++;
                 Sleep(3000);
                 system("cls");
+                continue;
             }
-            vremov--;
+            remov--;
             contaj++;
             // da para transformar numa função com ponteiro x;
             switch (x)
@@ -260,7 +308,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             system("cls");
             continue;
         }
-        else if (r == '1' && vremov == 0)
+        else if (r == '1' && remov == 0)
         {
             printf("Você esgotou todas as remoções\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
             Sleep(3000);
@@ -287,6 +335,17 @@ int p1(char gaba, int x, char esppremios[][40], int z)
                 printf("\t\t\t%s\n", esppremios[z]);
             }
             return 1;
+        }
+        if (x == 9 && r == gaba)
+        {
+            printf("\t\t\t\t\t-------------------------------------\n");
+            printf("\t\t\t\t\t|PARABÉNS!!! VOCÊ CONCLUIU O DESAFIO|\n");
+            printf("\t\t\t\t\t-------------------------------------\n\n");
+            printf("\t\t\t\t\tPremios Recebidos:\n");
+            for (z = 0; z < x; z++)
+            {
+                printf("\t\t\t\t%s\n", esppremios[z]);
+            }
         }
     } while (y == 0);
 }
@@ -363,15 +422,15 @@ void galinha()
 void dica(int *espx)
 {
     char *dicas[] = {
-        "1 Dicas: Esse exercício é realizado com movimento em sentido ao peito.",
-        "2 Dicas: Sua origem permite que seja produzida açúcar de seus nutrientes.",
-        "3 DICAS: É um alimento associado aos macacos.",
-        "4 Dica: É dito ao levantar um peso que nunca levantou antes.",
-        "5 DICA: défict calórico.",
-        "6 Dica: Fase em que segura a descida.",
-        "7 DICAS: Lubrifica os ossos, mas também auxilia na produção de algo que garante o funcionamento do organismo.",
-        "8 DICAS: Melhorar a performance.",
-        "9 Dicas: Observe o peitoral dele!",
-        "10 Dicas: (sobretreinamento)."};
+        "DICA: Esse exercício é realizado com movimento em sentido ao peito.",
+        "DICA: Sua origem permite que seja produzida açúcar de seus nutrientes.",
+        "DICA: É um alimento associado aos macacos.",
+        "DICA: É dito ao levantar um peso que nunca levantou antes.",
+        "DICA: défict calórico.",
+        "DICA: Fase em que segura a descida.",
+        "DICA: Lubrifica os ossos, mas também auxilia na produção de algo que garante o funcionamento do organismo.",
+        "DICA: Melhorar a performance.",
+        "DICA: Observe o peitoral dele!",
+        "DICA: (sobretreinamento)."};
     printf("Dica: %s\n", dicas[*espx]);
 } // ultima alteracao;
