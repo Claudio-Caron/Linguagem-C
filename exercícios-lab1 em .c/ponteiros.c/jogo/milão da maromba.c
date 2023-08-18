@@ -130,7 +130,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
 {
     char perguntas[11][200] = {
         "1- Qual é a finalidade do exercício \"rosca martelo\"?",
-        "2- Qual alimento e responsável por promover a vaso-dilatação nos treinos, elevando a taxa de circulação sanguínea,      irrigando os músculos com mais eficiência durante os treinos?",
+        "2- Qual alimento e responsável por promover a vaso-dilatação nos treinos, elevando a taxa de circulação sanguínea,          irrigando os músculos com mais eficiência durante os treinos?",
         "3- Qual alimento é reconhecido por retirar as câimbras, pela sua rica fonte de potássio, auxiliando na contração e recu-   peração muscular?",
         "4- O que significa \"PR\" em musculação?",
         "5- Qual termo é usado para descrever o processo de redução de gordura corporal para destacar a definição muscular?",
