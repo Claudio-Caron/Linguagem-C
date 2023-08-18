@@ -3,7 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include <ctype.h>
-#include <time.h> //rand()
+#include <time.h>
 #include <windows.h>
 #define alternativa 150
 char perg[10][4][alternativa];
@@ -14,7 +14,7 @@ void escolha();
 void certo();
 void mensagem();
 void galinha();
-void dica(int *espx);
+void dica(int *);
 int remov = 2, numdica = 2, pula = 1;
 int p1(char gaba, int x, char esppremios[][40], int z);
 int main()
