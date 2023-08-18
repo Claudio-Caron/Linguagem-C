@@ -68,10 +68,10 @@ void escolha()
         "4:# Pasta de amendoim",
         "5:# Beta Alanina",
         "6:# Pré-treino",
-        "7:# Whey",
+        "7:# Whey Protein",
         "8:# Creatina",
-        "9:# Um Mes de academia grátis",
-        "10:# Um ano de farmacia grátis"}; // fazer um for do 0 ao premio da rodada menos um no else, com fito de imprimir todos os premios conseguidos no jogo;
+        "9:# Um Mês de academia grátis",
+        "10:# Um ano de farmácia grátis"}; // fazer um for do 0 ao premio da rodada menos um no else, com fito de imprimir todos os premios conseguidos no jogo;
     do
     {
         switch (rodada)
@@ -185,7 +185,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         }
         else if (r == '3' && pula == 0)
         {
-            printf("\t\t\t\tVocê já usou o recurso de pular");
+            printf("\t\t\t\tVocê já usou o recurso de salto\n");
             if (contdica != 0)
             {
                 Sleep(3000);
@@ -247,6 +247,16 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             printf("Premio obtido na rodada %s\n", esppremios[z]); // usar vetor para os premios tentar local ou global
             Sleep(4000);
             system("cls");
+            if (x==9){
+            printf("\t\t\t\t\t-------------------------------------\n");
+            printf("\t\t\t\t\t|PARABÉNS!!! VOCÊ CONCLUIU O DESAFIO|\n");
+            printf("\t\t\t\t\t-------------------------------------\n\n");
+            printf("\t\t\t\t\tPremios Recebidos:\n");
+            for (z = 0; z < x; z++)
+            {
+                printf("\t\t\t\t%s\n", esppremios[z]);
+            }
+            }
             return 0;
         }
         else if (r == '1' && remov > 0)
