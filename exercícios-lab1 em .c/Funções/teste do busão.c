@@ -3,7 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include <ctype.h>
-#include <time.h>
+#include <time.h> //rand()
 #include <windows.h>
 #define alternativa 150
 char perg[10][4][alternativa];
@@ -14,7 +14,7 @@ void escolha();
 void certo();
 void mensagem();
 void galinha();
-void dica(int *);
+void dica(int *espx);
 int remov = 2, numdica = 2, pula = 1;
 int p1(char gaba, int x, char esppremios[][40], int z);
 int main()
@@ -48,7 +48,7 @@ void mensagem()
     Sleep(3000);
     printf("\n\n\t\t\t\tPrepare seu shake\n");
     Sleep(1500);
-    printf("\t\t\t\tO jogo irÃ¡ iniciar");
+    printf("\t\t\t\tO jogo irá iniciar");
     Sleep(1000);
     for (j = 0; j < 3; j++)
     {
@@ -62,22 +62,22 @@ void escolha()
     int cont = 0, rodada = 0;
     char gabarito[11] = "BBCDCDDDDC";
     char premios[10][40] = {
-        "1:# Hiper CalÃ³rico",
+        "1:# Hiper Calórico",
         "2:# Omega 3",
         "3:# Caixa de barrinhas proteicas",
         "4:# Pasta de amendoim",
         "5:# Beta Alanina",
-        "6:# PrÃ©-treino",
+        "6:# Pré-treino",
         "7:# Whey Protein",
         "8:# Creatina",
-        "9:# Um MÃªs de academia grÃ¡tis",
-        "10:# Um ano de farmÃ¡cia grÃ¡tis"}; // fazer um for do 0 ao premio da rodada menos um no else, com fito de imprimir todos os premios conseguidos no jogo;
+        "9:# Um Mês de academia grátis",
+        "10:# Um ano de farmácia grátis"}; // fazer um for do 0 ao premio da rodada menos um no else, com fito de imprimir todos os premios conseguidos no jogo;
     do
     {
         switch (rodada)
         {
-        case 0:                                         // inicia rodada 1, porÃ©m, utilizei o 0 para reciclar a variavel em outra funÃ§Ã£o
-            cont = p1(gabarito[0], rodada, premios, 0); // se nÃ£o der certo, tentar jogar [] da matriz para cima e deixar como parametro em baixo so o nome da matriz; ou ainda fazer uma funÃ§Ã£o somente para os premios;
+        case 0:                                         // inicia rodada 1, porém, utilizei o 0 para reciclar a variavel em outra função
+            cont = p1(gabarito[0], rodada, premios, 0); // se não der certo, tentar jogar [] da matriz para cima e deixar como parametro em baixo so o nome da matriz; ou ainda fazer uma função somente para os premios;
             break;
         case 1:
             cont = p1(gabarito[1], rodada, premios, 1);
@@ -113,11 +113,11 @@ void escolha()
 void mensrodada(int esprodada)
 {
     printf("\t\t\t\t\t\t----------\n");
-    printf("\t\t\t\t\t\t|RODADA %d|\n\t\t\t\t\t\t----------\n Responda a pergunta corretamente e acumule prÃªmios!\n\n", esprodada + 1);
+    printf("\t\t\t\t\t\t|RODADA %d|\n\t\t\t\t\t\t----------\n Responda a pergunta corretamente e acumule prêmios!\n\n", esprodada + 1);
     printf("/--------------------------------------------\\\n");
     printf("|Para remover duas alternativas, digite 1    |\n");
     printf("|--------------------------------------------|\n");
-    printf("|Para solicitar uma dica da questÃ£o, digite 2|\n");
+    printf("|Para solicitar uma dica da questão, digite 2|\n");
     printf("|--------------------------------------------|\n");
     printf("|Para saltar a pergunta, digite 3            |\n");
     printf("\\--------------------------------------------/\n");
@@ -129,25 +129,25 @@ void certo()
 int p1(char gaba, int x, char esppremios[][40], int z)
 {
     char perguntas[11][200] = {
-        "1- Qual Ã© a finalidade do exercÃ­cio \"rosca martelo\"?",
-        "2- Qual alimento e responsÃ¡vel por promover a vaso-dilataÃ§Ã£o nos treinos, elevando a taxa de circulaÃ§Ã£o sanguÃ­nea,          irrigando os mÃºsculos com mais eficiÃªncia durante os treinos?",
-        "3- Qual alimento Ã© reconhecido por retirar as cÃ¢imbras, pela sua rica fonte de potÃ¡ssio, auxiliando na contraÃ§Ã£o e recuperaÃ§Ã£o muscular?",
-        "4- O que significa \"PR\" em musculaÃ§Ã£o?",
-        "5- Qual termo Ã© usado para descrever o processo de reduÃ§Ã£o de gordura corporal para destacar a definiÃ§Ã£o muscular?",
-        "6- Qual Ã© a tÃ©cnica em que vocÃª realiza esforÃ§o na fase excÃªntrica do exercÃ­cio, na falha muscular?",
-        "7- Qual Ã© o papel das gorduras na dieta de um praticante de musculaÃ§Ã£o?",
-        "8- Qual Ã© a importÃ¢ncia da periodizaÃ§Ã£o no treinamento de musculaÃ§Ã£o?",
-        "9- Professor Ã© Fake-Natty?",
-        "10- O que Ã© o \"overtraining\" e por que Ã© importante evitÃ¡-lo?"};
+        "1- Qual é a finalidade do exercício \"rosca martelo\"?",
+        "2- Qual alimento e responsável por promover a vaso-dilatação nos treinos, elevando a taxa de circulação sanguínea,          irrigando os músculos com mais eficiência durante os treinos?",
+        "3- Qual alimento é reconhecido por retirar as câimbras, pela sua rica fonte de potássio, auxiliando na contração e recu-   peração muscular?",
+        "4- O que significa \"PR\" em musculação?",
+        "5- Qual termo é usado para descrever o processo de redução de gordura corporal para destacar a definição muscular?",
+        "6- Qual é a técnica em que você realiza esforço na fase excêntrica do exercício, na falha muscular?",
+        "7- Qual é o papel das gorduras na dieta de um praticante de musculação?",
+        "8- Qual é a importância da periodização no treinamento de musculação?",
+        "9- Professor é Fake-Natty?",
+        "10- O que é o \"overtraining\" e por que é importante evitá-lo?"};
     char r;
-    int i, y = 0, contaj = 0, contdica = 0; // usar ponteiro para declarar essas variÃ¡veis no bloco do escolha;Se nÃ£o der certo, declarar como globais, mas vai dar certo sim, confia
-    // int x=0;//posisao do vetor da pergunta;(usar como parÃ¢metro em chamarpergunta)
+    int i, y = 0, contaj = 0, contdica = 0; // usar ponteiro para declarar essas variáveis no bloco do escolha;Se não der certo, declarar como globais, mas vai dar certo sim, confia
+    // int x=0;//posisao do vetor da pergunta;(usar como parâmetro em chamarpergunta)
     do
     {
         do
         {
             mensrodada(x);
-            printf("REMOÃ‡Ã•ES RESTANTES: %d\nDICAS RESTANTES: %d\nSALTO RESTANTE: %d\n\n", remov, numdica, pula);
+            printf("REMOÇÕES RESTANTES: %d\nDICAS RESTANTES: %d\nSALTO RESTANTE: %d\n\n", remov, numdica, pula);
             printf("%s\n", perguntas[x]);
             for (i = 0; i < 4; i++)
             {
@@ -162,7 +162,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             r = toupper(r);
             if (r != 'A' && r != 'B' && r != 'C' && r != 'D' && r != '1' && r != '2' && r != '3')
             {
-                printf("VocÃª digitou uma opÃ§Ã£o invÃ¡lida, insira novamente a alternativa em :");
+                printf("Você digitou uma opção inválida, insira novamente a alternativa em :");
                 for (i = 3; i > 0; i--)
                 {
                     if (i == 3)
@@ -174,23 +174,23 @@ int p1(char gaba, int x, char esppremios[][40], int z)
                 }
                 system("cls");
             }
-        } while (r != 'A' && r != 'B' && r != 'C' && r != 'D' && r != '1' && r != '2' && r != '3'); // alterar a condiÃ§Ã£o no momento que for implementado ajudas.
+        } while (r != 'A' && r != 'B' && r != 'C' && r != 'D' && r != '1' && r != '2' && r != '3'); // alterar a condição no momento que for implementado ajudas.
         if (r == '3' && pula > 0)
         {
             pula--;
-            printf("\t\t\t\tVocÃª saltou essa pergunta!!!\n\n");
+            printf("\t\t\t\tVocê saltou essa pergunta!!!\n\n");
             Sleep(3000);
             system("cls");
             return 0;
         }
         else if (r == '3' && pula == 0)
         {
-            printf("\t\t\t\tVocÃª jÃ¡ usou o recurso de salto\n");
+            printf("\t\t\t\tVocê já usou o recurso de salto\n");
             if (contdica != 0)
             {
-                Sleep(3000);//adicionar esse bloco nas remoÃ§Ãµes
+                Sleep(3000);
                 system("cls");
-                dica(&x);//fazer uma funÃ§Ã£o para dica, com fito de reduzir as linhas
+                dica(&x);
                 continue;
             }
             Sleep(3000);
@@ -210,7 +210,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             {
                 if (numdica == 1 && contdica != 0)
                 {
-                    printf("VocÃª jÃ¡ solicitou dicas nessa rodada!!!RESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+                    printf("Você já solicitou dicas nessa rodada!!!RESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
                     Sleep(3000);
                     system("cls");
                     dica(&x);
@@ -234,7 +234,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             }
             else if (numdica == 0)
             {
-                printf("VocÃª nÃ£o possui mais dicas disponÃ­veis!!!RESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+                printf("Você não possui mais dicas disponíveis!!!RESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
                 Sleep(3000);
                 system("cls");
                 // dica(&x);
@@ -247,16 +247,15 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             printf("Premio obtido na rodada %s\n", esppremios[z]); // usar vetor para os premios tentar local ou global
             Sleep(4000);
             system("cls");
-            if (x == 9)
+            if (x==9){
+            printf("\t\t\t\t\t-------------------------------------\n");
+            printf("\t\t\t\t\t|PARABÉNS!!! VOCÊ CONCLUIU O DESAFIO|\n");
+            printf("\t\t\t\t\t-------------------------------------\n\n");
+            printf("\t\t\t\t\tPremios Recebidos:\n");
+            for (z = 0; z < x; z++)
             {
-                printf("\t\t\t\t\t-------------------------------------\n");
-                printf("\t\t\t\t\t|PARABÃ‰NS!!! VOCÃŠ CONCLUIU O DESAFIO|\n");
-                printf("\t\t\t\t\t-------------------------------------\n\n");
-                printf("\t\t\t\t\tPremios Recebidos:\n");
-                for (z = 0; z < x; z++)
-                {
-                    printf("\t\t\t\t%s\n", esppremios[z]);
-                }
+                printf("\t\t\t\t%s\n", esppremios[z]);
+            }
             }
             return 0;
         }
@@ -265,14 +264,14 @@ int p1(char gaba, int x, char esppremios[][40], int z)
 
             if (contaj != 0)
             {
-                printf("VocÃª jÃ¡ removeu uma alternativa nessa rodada!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+                printf("Você já removeu uma alternativa nessa rodada!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
                 Sleep(3000);
                 system("cls");
                 continue;
             }
             remov--;
             contaj++;
-            // da para transformar numa funÃ§Ã£o com ponteiro x;
+            // da para transformar numa função com ponteiro x;
             switch (x)
             {
             case 0:
@@ -321,33 +320,25 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         }
         else if (r == '1' && remov == 0)
         {
-            printf("VocÃª esgotou todas as remoÃ§Ãµes\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+            printf("Você esgotou todas as remoções\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
             Sleep(3000);
             system("cls");
             continue;
         }
         else
         {
-            //printf("Alternativa correta: %c\n", gaba);
-            system ("cls");
-            for (i = 0; i < 4; i++)
-            {
-                if (gaba==perg[x][i][0]){
-                printf("\t\t\tALTERNATIVA CORRETA: %s\n", perg[x][i]);
-                break;
-                }
-            }
-            galinha(); // transformar essa galinha em uma funÃ§Ã£o
+            printf("Alternativa correta: %c\n", gaba);
+            galinha(); // transformar essa galinha em uma função
             //  fazer um for para mostrar os premios conseguidos
             if (x == 0)
             {
                 printf("\t\t\t-------------------------------------------\n");
-                printf("\t\t\t|Jogo encerrado, vocÃª nÃ£o conseguiu prÃªmios|\n");
+                printf("\t\t\t|Jogo encerrado, você não conseguiu prêmios|\n");
                 printf("\t\t\t--------------------------------------------\n");
                 return 1;
             }
             printf("\t\t\t-------------------------------------\n");
-            printf("\t\t\t|Jogo encerrado, prÃªmios acumulados:|\n");
+            printf("\t\t\t|Jogo encerrado, prêmios acumulados:|\n");
             printf("\t\t\t-------------------------------------\n");
             for (z = 0; z < x; z++)
             {
@@ -355,25 +346,36 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             }
             return 1;
         }
+        if (x == 9 && r == gaba)
+        {
+            printf("\t\t\t\t\t-------------------------------------\n");
+            printf("\t\t\t\t\t|PARABÉNS!!! VOCÊ CONCLUIU O DESAFIO|\n");
+            printf("\t\t\t\t\t-------------------------------------\n\n");
+            printf("\t\t\t\t\tPremios Recebidos:\n");
+            for (z = 0; z < x; z++)
+            {
+                printf("\t\t\t\t%s\n", esppremios[z]);
+            }
+        }
     } while (y == 0);
 }
 void preencher()
 {
-    strcpy(perg[0][0], "A) Trabalhar de maneira isolada o bÃ­ceps.");
-    strcpy(perg[0][1], "B) Dar Ãªnfase na porcao  do bÃ­ceps braquial, com sinergismo(movimento auxiliar) do ante-braÃ§o.");
-    strcpy(perg[0][2], "C) Como o exercicio e realizado em uma pegada neutra, trabalha isoladamente a cabeÃ§a curta do biceps.");
-    strcpy(perg[0][3], "D) trabalhar de maneira isolada o ante-braÃ§o.");
+    strcpy(perg[0][0], "A) Trabalhar de maneira isolada o bíceps.");
+    strcpy(perg[0][1], "B) Dar ênfase na porcao  do bíceps braquial, com sinergismo(movimento auxiliar) do ante-braço.");
+    strcpy(perg[0][2], "C) Como o exercicio e realizado em uma pegada neutra, trabalha isoladamente a cabeça curta do biceps.");
+    strcpy(perg[0][3], "D) trabalhar de maneira isolada o ante-braço.");
     strcpy(perg[1][0], "A)Cenoura.");
     strcpy(perg[1][1], "B)Beterraba.");
     strcpy(perg[1][2], "C)Melancia.");
     strcpy(perg[1][3], "D)Batata-Doce.");
     strcpy(perg[2][0], "A)Ovo.");
-    strcpy(perg[2][1], "B)Castanha-do-ParÃ¡.");
+    strcpy(perg[2][1], "B)Castanha-do-Pará.");
     strcpy(perg[2][2], "C)Banana.");
     strcpy(perg[2][3], "D)Leite.");
-    strcpy(perg[3][0], "A)Progresso RÃ¡pido.");
+    strcpy(perg[3][0], "A)Progresso Rápido.");
     strcpy(perg[3][1], "B)Peso Real.");
-    strcpy(perg[3][2], "C)PotÃªncia Reversa.");
+    strcpy(perg[3][2], "C)Potência Reversa.");
     strcpy(perg[3][3], "D)Personal Record (Recorde Pessoal).");
     strcpy(perg[4][0], "A)Hipertrofia.");
     strcpy(perg[4][1], "B)Bulking.");
@@ -381,31 +383,31 @@ void preencher()
     strcpy(perg[4][3], "D)Endurance.");
     strcpy(perg[5][0], "A)Isometria.");
     strcpy(perg[5][1], "B)Plyometria.");
-    strcpy(perg[5][2], "C)RepetiÃ§Ãµes parciais");
-    strcpy(perg[5][3], "D)SÃ©rie negativa"); //
+    strcpy(perg[5][2], "C)Repetições parciais");
+    strcpy(perg[5][3], "D)Série negativa"); //
     strcpy(perg[6][0], "A)Acelerar o metabolismo.");
-    strcpy(perg[6][1], "B)Fornecer fibras para a digestÃ£o.");
+    strcpy(perg[6][1], "B)Fornecer fibras para a digestão.");
     strcpy(perg[6][2], "C)Apoiar o crescimento dos ossos.");
-    strcpy(perg[6][3], "D)Regular hormÃ´nios e fornecer energia."); //
+    strcpy(perg[6][3], "D)Regular hormônios e fornecer energia."); //
     strcpy(perg[7][0], "A)Reduzir a necessidade de aquecimento.");
     strcpy(perg[7][1], "B)Evitar o ganho excessivo de massa muscular.");
-    strcpy(perg[7][2], "C)Prevenir lesÃµes articulares.");
-    strcpy(perg[7][3], "D)Maximizar os ganhos de forÃ§a e massa muscular."); //
+    strcpy(perg[7][2], "C)Prevenir lesões articulares.");
+    strcpy(perg[7][3], "D)Maximizar os ganhos de força e massa muscular."); //
     strcpy(perg[8][0], "A)Sim.");                                           //
     strcpy(perg[8][1], "B)Com certeza.");                                   //
-    strcpy(perg[8][2], "C)Sem dÃºvidas.");                                   //
+    strcpy(perg[8][2], "C)Sem dúvidas.");                                   //
     strcpy(perg[8][3], "D)Inquestionavelmente.");                           //
     strcpy(perg[9][0], "A)Um estado de relaxamento muscular excessivo.");
-    strcpy(perg[9][1], "B)Um perÃ­odo de tempo dedicado exclusivamente Ã  recuperaÃ§Ã£o.");
-    strcpy(perg[9][2], "C)Estresse corporal de treinamento muito alto sem descanso adequado, o que pode levar a fadiga crÃ´nica, lesÃµes e reduÃ§Ã£o no desempenho."); //
-    strcpy(perg[9][3], "D)Uma tÃ©cnica avanÃ§ada de treinamento para maximizar ganhos de forÃ§a rapidamente.");
+    strcpy(perg[9][1], "B)Um período de tempo dedicado exclusivamente à recuperação.");
+    strcpy(perg[9][2], "C)Estresse corporal de treinamento muito alto sem descanso adequado, o que pode levar a fadiga crônica, lesões e redução no desempenho."); //
+    strcpy(perg[9][3], "D)Uma técnica avançada de treinamento para maximizar ganhos de força rapidamente.");
 }
 void galinha()
 {
     printf("            ,~.\n");
     printf("           ,-'__ `-,\n");
     printf("          {,-'  `. }\n");
-    printf("         ,( Â° )   `-.__\n");
+    printf("         ,( ° )   `-.__\n");
     printf("        <=.) (         `-.__,==' ' ' '} \t\t---------------------\n");
     printf("          (   )                      /) \t\t|RESPOSTA INCORRETA!|\n");
     printf("           `-'\\  ,                    )\t\t\t---------------------\n");
@@ -418,8 +420,8 @@ void galinha()
     printf("                       //_||\n");
     printf("                    __//--'/`\n");
     printf("                  ,--'/`  '\n");
-    puts("VocÃª nÃ£o garantiu prÃªmios Nessa rodada!!!");
-    puts("\t\t\tVOCÃŠ Ã‰ FRANGOLINO!!!\n");
+    puts("Você não garantiu prêmios Nessa rodada!!!");
+    puts("\t\t\tVOCÊ É FRANGOLINO!!!\n");
     printf("\t\t\t       \\   \n");
     printf("\t\t\t       (o>  \n");
     printf("\t\t\t\\ \\  / ) \n");
@@ -430,13 +432,13 @@ void galinha()
 void dica(int *espx)
 {
     char *dicas[] = {
-        "DICA: Esse exercÃ­cio Ã© realizado com movimento em sentido ao peito.",
-        "DICA: Sua origem permite que seja produzida aÃ§Ãºcar de seus nutrientes.",
-        "DICA: Ã‰ um alimento associado aos macacos.",
-        "DICA: Ã‰ dito ao levantar um peso que nunca levantou antes.",
-        "DICA: dÃ©fict calÃ³rico.",
+        "DICA: Esse exercício é realizado com movimento em sentido ao peito.",
+        "DICA: Sua origem permite que seja produzida açúcar de seus nutrientes.",
+        "DICA: É um alimento associado aos macacos.",
+        "DICA: É dito ao levantar um peso que nunca levantou antes.",
+        "DICA: défict calórico.",
         "DICA: Fase em que segura a descida.",
-        "DICA: Lubrifica os ossos, mas tambÃ©m auxilia na produÃ§Ã£o de algo que garante o funcionamento do organismo.",
+        "DICA: Lubrifica os ossos, mas também auxilia na produção de algo que garante o funcionamento do organismo.",
         "DICA: Melhorar a performance.",
         "DICA: Observe o peitoral dele!",
         "DICA: (sobretreinamento)."};
