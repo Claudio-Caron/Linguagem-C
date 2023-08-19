@@ -14,6 +14,7 @@ void escolha();
 void certo();
 void mensagem();
 void galinha();
+void seringa();
 void dica(int *);
 int remov = 2, numdica = 2, pula = 1;
 int p1(char gaba, int x, char esppremios[][40], int z);
@@ -442,3 +443,19 @@ void dica(int *espx)
         "DICA: (sobretreinamento)."};
     printf("Dica: %s\n", dicas[*espx]);
 } // ultima alteracao;
+void seringa (){
+    printf ("                                        \n");
+    printf (" --      |======================================|            \n");
+    printf (" ||      |°°°°°°°°°°°°°\\                       |   \n");
+    printf (" ||======|°°°°°°°°°°°°°°\\ |  |  |  |  |  |  |  |        \n");
+    printf (" ||======|°°°°°°°°°°°°°°°\\---------------------|=====----------                \n");
+    printf (" ||======|°°°°°°°°°°°°°°°°\\                    |              /\\\n");
+    printf (" ||      |°°°°°°°°°°°°°°°°°\\                   |             /  \\\n");
+    printf (" --      |======================================|            /    \\\n");
+    printf ("                                                            /      \\ \n");
+    printf ("                                                           /        \\      \n");
+    printf ("                                                          (           ) \n");
+    printf ("                                                           `--.....--´ \n");
+    printf ("                                                               \n");
+    printf ("                                        \n");
+}
