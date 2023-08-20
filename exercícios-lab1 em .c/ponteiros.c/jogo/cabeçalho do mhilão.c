@@ -2,7 +2,7 @@
 #include <windows.h>
 int main()
 {
-    /*int j;
+   /* int j;
     puts ("\t\t\t=======||  ||       || //=======\\  \\\\          //");
     puts ("\t\t\t||         ||       || ||       ||  \\\\        //");
     puts ("\t\t\t||======|| ||=======|| ||       ||   \\\\  /\\  //");
@@ -27,21 +27,7 @@ int main()
         printf (".");
         Sleep (1000);
     }
-    printf (" \n");*/
-    /*    printf ("                                        \n");
-    printf (" --      |======================================|            \n");
-    printf (" ||      |°°°°°°°°°°°\\               |   \n");
-    printf (" ||======|°°°°°°°°°°°°\\ |  |  |  |  |        \n");
-    printf (" ||======|°°°°°°°°°°°°°\\-----------|=====----------                \n");
-    printf (" ||======|°°°°°°°°°°°°°°\\         |              /\\\n");
-    printf (" ||      |°°°°°°°°°°°°°°°\\       |             /  \\\n");
-    printf (" --      |======================================|            /    \\\n");
-    printf ("                                                            /      \\ \n");
-    printf ("                                                           /        \\      \n");
-    printf ("                                                          (          ) \n");
-    printf ("                                                           `--.....-' \n");
-    printf ("                                                               \n");
-    */
+    printf ("                                                               \n");*/
     int z, x = 9;
     char premios[10][40] = {
         "1:# Hiper Calórico",
@@ -54,14 +40,15 @@ int main()
         "8:# Creatina",
         "9:# Um Mês de academia grátis",
         "10:# Um ano de farmácia grátis"};
-    printf("\t\t\t\t\t--------------------------------------\n");
+    printf("\t\t\t\t\t-------------------------------------\n");
     printf("\t\t\t\t\t|PARABÉNS!!! VOCÊ CONCLUIU O DESAFIO|\n");
-    printf("\t\t\t\t\t--------------------------------------\n\n");
+    printf("\t\t\t\t\t-------------------------------------\n\n");
     printf("\t\t\t\t\tPrêmios Recebidos:\n");
     for (z = 0; z <= x; z++)//sinal de "=" adicionado para imprimir o último prêmio.
     {
         printf("\t\t\t\t%s\n", premios[z]);//quando passar de volta, adicionar "esp" no vetor; 
     }
+    /*
     printf ("\n\n");
     printf("\t\t\t --      |======================================|            \n");
     printf("\t\t\t ||      |***********\\                          |   \n");
@@ -73,6 +60,18 @@ int main()
     printf("\t\t\t                                                            /      \\ \n");
     printf("\t\t\t                                                           /        \\      \n");
     printf("\t\t\t                                                          (          ) \n");
-    printf("\t\t\t                                                           `--.....-' \n");
+    printf("\t\t\t                                                           `--.....-' \n");*/
+    printf (" \n");
+    printf (" --      |======================================|            \n");
+    printf (" ||      |°°°°°°°°°°°\\               |   \n");
+    printf (" ||======|°°°°°°°°°°°°\\ |  |  |  |  |        \n");
+    printf (" ||======|°°°°°°°°°°°°°\\-----------|=====----------                \n");
+    printf (" ||======|°°°°°°°°°°°°°°\\         |              /\\\n");
+    printf (" ||      |°°°°°°°°°°°°°°°\\       |             /  \\\n");
+    printf (" --      |======================================|            /    \\\n");
+    printf ("                                                            /      \\ \n");
+    printf ("                                                           /        \\      \n");
+    printf ("                                                          (          ) \n");
+    printf ("                                                           `--.....-' \n");
     return 0;
 }
