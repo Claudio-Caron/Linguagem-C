@@ -15,10 +15,11 @@ void certo();
 void mensagem();
 void galinha();
 void seringa();
-void instrucoes ();
+void instrucoes();
 void dica(int *);
-int remov = 2, numdica = 2, pula = 1;
-int p1(char gaba, int x, char esppremios[][40], int z);
+//int remov = 2, numdica = 2, pula = 1;
+//int remov, int numdica, int pula, 
+int p1(int *, int *, int *, char gaba, int x, char esppremios[][40], int z);
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
@@ -62,6 +63,7 @@ void mensagem()
 }
 void escolha()
 {
+    int oremov=2, onumdica=2, opula=1; 
     int cont = 0, rodada = 0;
     char gabarito[11] = "BBCDCDDDDC";
     char premios[10][40] = {
@@ -80,34 +82,34 @@ void escolha()
         switch (rodada)
         {
         case 0:                                         // inicia rodada 1, porém, utilizei o 0 para reciclar a variavel em outra função
-            cont = p1(gabarito[0], rodada, premios, 0); // se não der certo, tentar jogar [] da matriz para cima e deixar como parametro em baixo so o nome da matriz; ou ainda fazer uma função somente para os premios;
+            cont = p1(&oremov, &onumdica, &opula, gabarito[0], rodada, premios, 0); // se não der certo, tentar jogar [] da matriz para cima e deixar como parametro em baixo so o nome da matriz; ou ainda fazer uma função somente para os premios;
             break;
         case 1:
-            cont = p1(gabarito[1], rodada, premios, 1);
+            cont = p1(&oremov, &onumdica, &opula, gabarito[1], rodada, premios, 1);
             break;
         case 2:
-            cont = p1(gabarito[2], rodada, premios, 2);
+            cont = p1(&oremov, &onumdica, &opula, gabarito[2], rodada, premios, 2);
             break;
         case 3:
-            cont = p1(gabarito[3], rodada, premios, 3);
+            cont = p1(&oremov, &onumdica, &opula, gabarito[3], rodada, premios, 3);
             break;
         case 4:
-            cont = p1(gabarito[4], rodada, premios, 4);
+            cont = p1(&oremov, &onumdica, &opula, gabarito[4], rodada, premios, 4);
             break;
         case 5:
-            cont = p1(gabarito[5], rodada, premios, 5);
+            cont = p1(&oremov, &onumdica, &opula, gabarito[5], rodada, premios, 5);
             break;
         case 6:
-            cont = p1(gabarito[6], rodada, premios, 6);
+            cont = p1(&oremov, &onumdica, &opula, gabarito[6], rodada, premios, 6);
             break;
         case 7:
-            cont = p1(gabarito[7], rodada, premios, 7);
+            cont = p1(&oremov, &onumdica, &opula, gabarito[7], rodada, premios, 7);
             break;
         case 8:
-            cont = p1(gabarito[8], rodada, premios, 8);
+            cont = p1(&oremov, &onumdica, &opula, gabarito[8], rodada, premios, 8);
             break;
         case 9:
-            cont = p1(gabarito[9], rodada, premios, 9);
+            cont = p1(&oremov, &onumdica, &opula, gabarito[9], rodada, premios, 9);
             break;
         }
         rodada++;
@@ -129,7 +131,7 @@ void certo()
 {
     printf("\t\t\t\tResposta correta!\n\t\t\t\tAguarde para prosseguir\n\n");
 }
-int p1( char gaba, int x, char esppremios[][40], int z)
+int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][40], int z)
 {
     const char perguntas[11][200] = {
         "1- Qual é a finalidade do exercício \"rosca martelo\"?",
@@ -150,7 +152,7 @@ int p1( char gaba, int x, char esppremios[][40], int z)
         do
         {
             mensrodada(x);
-            printf("REMOÇÕES RESTANTES: %d\nDICAS RESTANTES: %d\nSALTO RESTANTE: %d\n\n", remov, numdica, pula);
+            printf("REMOÇÕES RESTANTES: %d\nDICAS RESTANTES: %d\nSALTO RESTANTE: %d\n\n", *remov, *numdica, *pula);
             printf("%s\n", perguntas[x]);
             for (i = 0; i < 4; i++)
             {
@@ -178,18 +180,18 @@ int p1( char gaba, int x, char esppremios[][40], int z)
                 system("cls");
             }
         } while (r != 'A' && r != 'B' && r != 'C' && r != 'D' && r != '1' && r != '2' && r != '3'); // alterar a condição no momento que for implementado ajudas.
-        if (r == '3' && pula > 0)
+        if (r == '3' && *pula > 0)
         {
 
-            pula--;
+            pula=*pula-1;
             printf("\t\t\t\tVocê saltou essa pergunta!!!\n\n");
-            Sleep (1500);
+            Sleep(1500);
             printf("Premio obtido na rodada %s\n", esppremios[z]);
             Sleep(4000);
             system("cls");
             return 0;
         }
-        else if (r == '3' && pula == 0)
+        else if (r == '3' && *pula == 0)
         {
             printf("\t\t\t\tVocê já usou o recurso de salto!!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
             if (contdica != 0)
@@ -212,9 +214,9 @@ int p1( char gaba, int x, char esppremios[][40], int z)
         }
         if (r == '2')
         {
-            if (numdica > 0)
+            if (*numdica > 0)
             {
-                if (numdica == 1 && contdica != 0)
+                if (*numdica == 1 && contdica != 0)
                 {
                     printf("Você já solicitou dicas nessa rodada!!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
                     Sleep(3000);
@@ -222,28 +224,30 @@ int p1( char gaba, int x, char esppremios[][40], int z)
                     dica(&x);
                     continue;
                 }
-                if (numdica == 2 && contdica == 0)
+                if (*numdica == 2 && contdica == 0)
                 {
-                    numdica--;
+                    numdica=*numdica-1;
                     contdica++;
                     system("cls");
                     dica(&x);
                     continue;
                 }
-                else if (numdica == 1 && contdica == 0)
+                else if (*numdica == 1 && contdica == 0)
                 {
-                    numdica--;
+                    numdica=*numdica-1;
                     system("cls");
                     dica(&x);
                     continue;
                 }
             }
-            else if (numdica == 0)
+            else if (*numdica == 0)
             {
                 printf("Você não possui mais dicas disponíveis!!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
                 Sleep(3000);
                 system("cls");
-                // dica(&x);
+                if (contdica!=0){
+                dica(&x);
+                }
                 continue;
             }
         }
@@ -267,17 +271,24 @@ int p1( char gaba, int x, char esppremios[][40], int z)
             }
             return 0;
         }
-        else if (r == '1' && remov > 0)
+        else if (r == '1' && *remov > 0)
         {
 
             if (contaj != 0)
             {
                 printf("Você já removeu uma alternativa nessa rodada!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+                if (contdica != 0)
+                {
+                    Sleep(3000);
+                    system("cls");
+                    dica(&x);
+                    continue;
+                }
                 Sleep(3000);
                 system("cls");
                 continue;
             }
-            remov--;
+            remov=*remov-1;
             contaj++;
             // da para transformar numa função com ponteiro x;
             switch (x)
@@ -323,12 +334,26 @@ int p1( char gaba, int x, char esppremios[][40], int z)
                 strcpy(perg[9][3], "D)");
                 break;
             }
+            if (contdica != 0)
+            {
+                system("cls");
+                dica(&x);
+                continue;
+            }
             system("cls");
             continue;
         }
-        else if (r == '1' && remov == 0)
+        else if (r == '1' && *remov == 0)
         {
+
             printf("Você esgotou todas as remoções\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+            if (contdica != 0)
+            {
+                Sleep(3000);
+                system("cls");
+                dica(&x);
+                continue;
+            }
             Sleep(3000);
             system("cls");
             continue;
@@ -452,7 +477,7 @@ void dica(int *espx)
 } // ultima alteracao;
 void seringa()
 {
-    printf ("\n\n");
+    printf("\n\n");
     printf("\t\t\t --      |======================================|            \n");
     printf("\t\t\t ||      |***********\\                          |   \n");
     printf("\t\t\t ||======|************\\ |  |  |  |  |  |  |  |  | \n");
@@ -465,8 +490,9 @@ void seringa()
     printf("\t\t\t                                                          (          ) \n");
     printf("\t\t\t                                                           `--.....-' \n");
 }
-void instrucoes (){
-    printf ("\t\t° O jogo é caracterizado com perguntas do meio maromba(estratégias de dieta e treino)\n\t\t° O jogo tamém é composto por 10 questões\n\t\t° Cada qustão contém um prêmio, que pode ser obtido por meio de ajudas limitadas\n\n\n\t\t\t\t");
-    system ("pause");
-    system ("cls");
+void instrucoes()
+{
+    printf("\t\t° O jogo é caracterizado com perguntas do meio maromba(estratégias de dieta e treino)\n\t\t° O jogo tamém é composto por 10 questões\n\t\t° Cada qustão contém um prêmio, que pode ser obtido por meio de ajudas limitadas\n\n\n\t\t\t\t");
+    system("pause");
+    system("cls");
 }
