@@ -48,7 +48,7 @@ int main()
     {
         printf("\t\t\t\t%s\n", premios[z]);//quando passar de volta, adicionar "esp" no vetor; 
     }
-    /*
+    
     printf ("\n\n");
     printf("\t\t\t --      |======================================|            \n");
     printf("\t\t\t ||      |***********\\                          |   \n");
@@ -60,7 +60,7 @@ int main()
     printf("\t\t\t                                                            /      \\ \n");
     printf("\t\t\t                                                           /        \\      \n");
     printf("\t\t\t                                                          (          ) \n");
-    printf("\t\t\t                                                           `--.....-' \n");*/
+    printf("\t\t\t                                                           `--.....-' \n");
     printf (" \n");
     printf (" --      |======================================|            \n");
     printf (" ||      |°°°°°°°°°°°\\               |   \n");

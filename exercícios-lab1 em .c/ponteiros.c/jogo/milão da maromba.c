@@ -15,12 +15,14 @@ void certo();
 void mensagem();
 void galinha();
 void seringa();
+void instrucoes ();
 void dica(int *);
 int remov = 2, numdica = 2, pula = 1;
 int p1(char gaba, int x, char esppremios[][40], int z);
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
+    instrucoes();
     mensagem();
     preencher();
     system("cls");
@@ -127,9 +129,9 @@ void certo()
 {
     printf("\t\t\t\tResposta correta!\n\t\t\t\tAguarde para prosseguir\n\n");
 }
-int p1(char gaba, int x, char esppremios[][40], int z)
+int p1( char gaba, int x, char esppremios[][40], int z)
 {
-    char perguntas[11][200] = {
+    const char perguntas[11][200] = {
         "1- Qual é a finalidade do exercício \"rosca martelo\"?",
         "2- Qual alimento e responsável por promover a vaso-dilatação nos treinos, elevando a taxa de circulação sanguínea,          irrigando os músculos com mais eficiência durante os treinos?",
         "3- Qual alimento é reconhecido por retirar as câimbras, pela sua rica fonte de potássio, auxiliando na contração e recuperação muscular?",
@@ -178,20 +180,23 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         } while (r != 'A' && r != 'B' && r != 'C' && r != 'D' && r != '1' && r != '2' && r != '3'); // alterar a condição no momento que for implementado ajudas.
         if (r == '3' && pula > 0)
         {
+
             pula--;
             printf("\t\t\t\tVocê saltou essa pergunta!!!\n\n");
-            Sleep(3000);
+            Sleep (1500);
+            printf("Premio obtido na rodada %s\n", esppremios[z]);
+            Sleep(4000);
             system("cls");
             return 0;
         }
         else if (r == '3' && pula == 0)
         {
-            printf("\t\t\t\tVocê já usou o recurso de salto\n");
+            printf("\t\t\t\tVocê já usou o recurso de salto!!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
             if (contdica != 0)
             {
-                Sleep(3000);//adicionar esse bloco nas remoções
+                Sleep(3000); // adicionar esse bloco nas remoções
                 system("cls");
-                dica(&x);//fazer uma função para dica, com fito de reduzir as linhas
+                dica(&x); // fazer uma função para dica, com fito de reduzir as linhas
                 continue;
             }
             Sleep(3000);
@@ -211,7 +216,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             {
                 if (numdica == 1 && contdica != 0)
                 {
-                    printf("Você já solicitou dicas nessa rodada!!!RESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+                    printf("Você já solicitou dicas nessa rodada!!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
                     Sleep(3000);
                     system("cls");
                     dica(&x);
@@ -235,7 +240,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
             }
             else if (numdica == 0)
             {
-                printf("Você não possui mais dicas disponíveis!!!RESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+                printf("Você não possui mais dicas disponíveis!!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
                 Sleep(3000);
                 system("cls");
                 // dica(&x);
@@ -245,7 +250,7 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         if (r == gaba)
         {
             certo();
-            printf("Premio obtido na rodada %s\n", esppremios[z]); // usar vetor para os premios tentar local ou global
+            printf("Prêmio obtido na rodada %s\n", esppremios[z]);
             Sleep(4000);
             system("cls");
             if (x == 9)
@@ -253,11 +258,12 @@ int p1(char gaba, int x, char esppremios[][40], int z)
                 printf("\t\t\t\t\t-------------------------------------\n");
                 printf("\t\t\t\t\t|PARABÉNS!!! VOCÊ CONCLUIU O DESAFIO|\n");
                 printf("\t\t\t\t\t-------------------------------------\n\n");
-                printf("\t\t\t\t\tPremios Recebidos:\n");
+                printf("\t\t\t\t\tPrêmios Recebidos:\n");
                 for (z = 0; z < x; z++)
                 {
                     printf("\t\t\t\t%s\n", esppremios[z]);
                 }
+                seringa();
             }
             return 0;
         }
@@ -329,13 +335,14 @@ int p1(char gaba, int x, char esppremios[][40], int z)
         }
         else
         {
-            //printf("Alternativa correta: %c\n", gaba);
-            system ("cls");
+            // printf("Alternativa correta: %c\n", gaba);
+            system("cls");
             for (i = 0; i < 4; i++)
             {
-                if (gaba==perg[x][i][0]){
-                printf("\t\t\tALTERNATIVA CORRETA: %s\n", perg[x][i]);
-                break;
+                if (gaba == perg[x][i][0])
+                {
+                    printf("\t\t\tALTERNATIVA CORRETA: %s\n", perg[x][i]);
+                    break;
                 }
             }
             galinha(); // transformar essa galinha em uma função
@@ -443,19 +450,23 @@ void dica(int *espx)
         "DICA: (sobretreinamento)."};
     printf("Dica: %s\n", dicas[*espx]);
 } // ultima alteracao;
-void seringa (){
-    printf ("                                        \n");
-    printf (" --      |======================================|            \n");
-    printf (" ||      |°°°°°°°°°°°°°\\                       |   \n");
-    printf (" ||======|°°°°°°°°°°°°°°\\ |  |  |  |  |  |  |  |        \n");
-    printf (" ||======|°°°°°°°°°°°°°°°\\---------------------|=====----------                \n");
-    printf (" ||======|°°°°°°°°°°°°°°°°\\                    |              /\\\n");
-    printf (" ||      |°°°°°°°°°°°°°°°°°\\                   |             /  \\\n");
-    printf (" --      |======================================|            /    \\\n");
-    printf ("                                                            /      \\ \n");
-    printf ("                                                           /        \\      \n");
-    printf ("                                                          (           ) \n");
-    printf ("                                                           `--.....--´ \n");
-    printf ("                                                               \n");
-    printf ("                                        \n");
+void seringa()
+{
+    printf ("\n\n");
+    printf("\t\t\t --      |======================================|            \n");
+    printf("\t\t\t ||      |***********\\                          |   \n");
+    printf("\t\t\t ||======|************\\ |  |  |  |  |  |  |  |  | \n");
+    printf("\t\t\t ||======|*************\\------------------------|=====----------                \n");
+    printf("\t\t\t ||======|**************\\                       |              /\\\n");
+    printf("\t\t\t ||      |***************\\                      |             /  \\\n");
+    printf("\t\t\t --      |======================================|            /    \\\n");
+    printf("\t\t\t                                                            /      \\ \n");
+    printf("\t\t\t                                                           /        \\      \n");
+    printf("\t\t\t                                                          (          ) \n");
+    printf("\t\t\t                                                           `--.....-' \n");
+}
+void instrucoes (){
+    printf ("\t\t° O jogo é caracterizado com perguntas do meio maromba(estratégias de dieta e treino)\n\t\t° O jogo tamém é composto por 10 questões\n\t\t° Cada qustão contém um prêmio, que pode ser obtido por meio de ajudas limitadas\n\n\n\t\t\t\t");
+    system ("pause");
+    system ("cls");
 }
