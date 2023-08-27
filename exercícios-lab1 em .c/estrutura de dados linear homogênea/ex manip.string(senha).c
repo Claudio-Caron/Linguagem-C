@@ -20,9 +20,7 @@ int main ()
         else
             printf ("SENHA INCORRETA! Você possui %i tentativas restantes\n", i-1);
         fflush (stdin);
-
     }
-
     system ("pause");
     return 0;
 }

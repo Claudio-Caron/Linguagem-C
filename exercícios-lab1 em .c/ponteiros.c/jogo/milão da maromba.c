@@ -63,7 +63,7 @@ void mensagem()
 }
 void escolha()
 {
-    int oremov=2, onumdica=2, opula=1; 
+    int oremov =2, onumdica =2, opula =1; 
     int cont = 0, rodada = 0;
     char gabarito[11] = "BBCDCDDDDC";
     char premios[10][40] = {
@@ -148,7 +148,7 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
     int i, y = 0, contaj = 0, contdica = 0; // usar ponteiro para declarar essas variáveis no bloco do escolha;Se não der certo, declarar como globais, mas vai dar certo sim, confia
     // int x=0;//posisao do vetor da pergunta;(usar como parâmetro em chamarpergunta)
     do
-    {
+    {// //
         do
         {
             mensrodada(x);
@@ -183,7 +183,7 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
         if (r == '3' && *pula > 0)
         {
 
-            pula=*pula-1;
+            pula--;
             printf("\t\t\t\tVocê saltou essa pergunta!!!\n\n");
             Sleep(1500);
             printf("Premio obtido na rodada %s\n", esppremios[z]);
@@ -198,7 +198,7 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
             {
                 Sleep(3000); // adicionar esse bloco nas remoções
                 system("cls");
-                dica(&x); // fazer uma função para dica, com fito de reduzir as linhas
+                dica(&x);// fazer uma função para dica, com fito de reduzir as linhas
                 continue;
             }
             Sleep(3000);
@@ -226,7 +226,7 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
                 }
                 if (*numdica == 2 && contdica == 0)
                 {
-                    numdica=*numdica-1;
+                    numdica--;
                     contdica++;
                     system("cls");
                     dica(&x);
@@ -234,7 +234,7 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
                 }
                 else if (*numdica == 1 && contdica == 0)
                 {
-                    numdica=*numdica-1;
+                    numdica--;
                     system("cls");
                     dica(&x);
                     continue;
@@ -281,14 +281,16 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
                 {
                     Sleep(3000);
                     system("cls");
+                    remov--;
                     dica(&x);
                     continue;
                 }
+                remov--;
                 Sleep(3000);
                 system("cls");
                 continue;
             }
-            remov=*remov-1;
+            remov--;
             contaj++;
             // da para transformar numa função com ponteiro x;
             switch (x)
@@ -389,6 +391,7 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
             return 1;
         }
     } while (y == 0);
+    //
 }
 void preencher()
 {
