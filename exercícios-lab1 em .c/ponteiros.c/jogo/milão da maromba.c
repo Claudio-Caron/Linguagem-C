@@ -5,7 +5,9 @@
 #include <ctype.h>
 #include <time.h>
 #include <windows.h>
+
 #define alternativa 150
+
 char perg[10][4][alternativa];
 void mensrodada(int esprodada);
 void preencher();
@@ -18,7 +20,7 @@ void seringa();
 void instrucoes();
 void dica(int *);
 //int remov = 2, numdica = 2, pula = 1;
-//int remov, int numdica, int pula, 
+// int remov, int numdica, int pula,
 int p1(int *, int *, int *, char gaba, int x, char esppremios[][40], int z);
 int main()
 {
@@ -63,7 +65,7 @@ void mensagem()
 }
 void escolha()
 {
-    int oremov =2, onumdica =2, opula =1; 
+    int oremov = 2, onumdica = 2, opula = 1;
     int cont = 0, rodada = 0;
     char gabarito[11] = "BBCDCDDDDC";
     char premios[10][40] = {
@@ -81,7 +83,7 @@ void escolha()
     {
         switch (rodada)
         {
-        case 0:                                         // inicia rodada 1, porém, utilizei o 0 para reciclar a variavel em outra função
+        case 0:                                                                     // inicia rodada 1, porém, utilizei o 0 para reciclar a variavel em outra função
             cont = p1(&oremov, &onumdica, &opula, gabarito[0], rodada, premios, 0); // se não der certo, tentar jogar [] da matriz para cima e deixar como parametro em baixo so o nome da matriz; ou ainda fazer uma função somente para os premios;
             break;
         case 1:
@@ -148,7 +150,7 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
     int i, y = 0, contaj = 0, contdica = 0; // usar ponteiro para declarar essas variáveis no bloco do escolha;Se não der certo, declarar como globais, mas vai dar certo sim, confia
     // int x=0;//posisao do vetor da pergunta;(usar como parâmetro em chamarpergunta)
     do
-    {// //
+    { // //
         do
         {
             mensrodada(x);
@@ -183,7 +185,7 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
         if (r == '3' && *pula > 0)
         {
 
-            pula--;
+            (*pula)--;
             printf("\t\t\t\tVocê saltou essa pergunta!!!\n\n");
             Sleep(1500);
             printf("Premio obtido na rodada %s\n", esppremios[z]);
@@ -193,12 +195,12 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
         }
         else if (r == '3' && *pula == 0)
         {
-            printf("\t\t\t\tVocê já usou o recurso de salto!!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
+            printf("\t\t\t\tVocê já usou o recurso de salto!!!\n\t\t\t\tRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
             if (contdica != 0)
             {
                 Sleep(3000); // adicionar esse bloco nas remoções
                 system("cls");
-                dica(&x);// fazer uma função para dica, com fito de reduzir as linhas
+                dica(&x); // fazer uma função para dica, com fito de reduzir as linhas
                 continue;
             }
             Sleep(3000);
@@ -226,7 +228,7 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
                 }
                 if (*numdica == 2 && contdica == 0)
                 {
-                    numdica--;
+                    (*numdica)--;
                     contdica++;
                     system("cls");
                     dica(&x);
@@ -234,7 +236,7 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
                 }
                 else if (*numdica == 1 && contdica == 0)
                 {
-                    numdica--;
+                    (*numdica)--;
                     system("cls");
                     dica(&x);
                     continue;
@@ -245,8 +247,9 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
                 printf("Você não possui mais dicas disponíveis!!!\nRESPONDA A PERGUNTA OU SOLICITE OUTRA AJUDA\n\n");
                 Sleep(3000);
                 system("cls");
-                if (contdica!=0){
-                dica(&x);
+                if (contdica != 0)
+                {
+                    dica(&x);
                 }
                 continue;
             }
@@ -281,16 +284,16 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
                 {
                     Sleep(3000);
                     system("cls");
-                    remov--;
+                    (*remov)--;
                     dica(&x);
                     continue;
                 }
-                remov--;
+                (*remov)--;
                 Sleep(3000);
                 system("cls");
                 continue;
             }
-            remov--;
+            (*remov)--;
             contaj++;
             // da para transformar numa função com ponteiro x;
             switch (x)
@@ -391,8 +394,8 @@ int p1(int *remov, int *numdica, int *pula, char gaba, int x, char esppremios[][
             return 1;
         }
     } while (y == 0);
-    //
 }
+
 void preencher()
 {
     strcpy(perg[0][0], "A) Trabalhar de maneira isolada o bíceps.");
