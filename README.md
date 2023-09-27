@@ -1,3 +1,4 @@
 # exercicios-linguagem C
- *primeiro repositório criado*
-essa linha eu adicionei diretamente do site.
+ *criado para deixar explícito as atividades desenvolvidas em C*
+ 
+__Dividido em subpartes de aprendizado__
