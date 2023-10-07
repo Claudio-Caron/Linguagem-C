@@ -3,7 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include <ctype.h>
-#include <time.h>
+//#include <time.h> (era para utilizar caso fosse preciso usar a função rand range - random-)
 #include <windows.h>
 
 #define alternativa 150
