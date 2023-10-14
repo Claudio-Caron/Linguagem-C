@@ -26,7 +26,6 @@ para comparar duas strings.
 suas bandas favoritas ou não.
 (f) Agora junte tudo e crie um programa que exiba um menu com as opções de preencher
 as estruturas e todas as opções dos subitens anteriores.*/
-//void preencher(banda cinco[], int n);
 void imprimir(banda mam[], int i);
 void solicitar(banda esc[], int y);
 void preencher(banda cinco[], int n);
