@@ -6,6 +6,7 @@
 #include "banda.h"
 #include "preencher.h"
 #include "print.h"
+#include "solicitar.h"
 #define N 5
 
 /*3. Para melhor compreensão, este exercício está dividido em subitens. Resolva todos os
@@ -36,28 +37,7 @@ int main()
     printf("iniciando\n");
     preencher(mamonas, N);
     imprimir(mamonas, N);
+    solicitar(mamonas, N);
     system("pause");
     return 0;
-}
-
-
-
-void solicitar(banda esc[], int y)
-{
-    do
-    {
-        printf("escolha uma banda para a pesquisa: \n");
-        scanf("%d", &y);
-        if (y < 0 || y > N)
-        {
-            system("cls");
-            printf("Pesquise uma banda de índice cadastrado");
-        }
-    } while (y < 0 || y > N);
-    y--;
-    printf("banda : %d\n", y + 1);
-    printf("%s \n", esc[y].nome);
-    printf("Genero: %s \n", esc[y].genero);
-    printf("N° de integrantes : %d", esc[y].integrantes);
-    printf("Classificação : %d\n\n\n", esc[y].classif);
 }

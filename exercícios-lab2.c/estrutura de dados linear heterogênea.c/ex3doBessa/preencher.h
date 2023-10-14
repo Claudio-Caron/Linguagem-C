@@ -4,7 +4,7 @@ void mensagem()
 }
 void preencher(banda cinco[], int n)
 {
-    int i, j=0;
+    int i, j = 0;
     for (n = 0; n < 5; n++)
     {
         printf("insira o nome da banda %i: \n", n + 1);
@@ -15,13 +15,13 @@ void preencher(banda cinco[], int n)
         scanf("%d", &cinco[n].integrantes);
         do
         {
-            j=0;
+            j = 0;
             printf("qual a posicao da banda no ranking?\n");
             scanf("%d", &cinco[n].classif);
             if (cinco[n].classif < 0 || cinco[n].classif > 5)
             {
                 system("cls");
-                printf("Voce inseriu uma posição fora do Top 5!!!\ninsira uma classificação para a banda %s de 0 a 5 lugar\n", cinco[n].nome);
+                printf("Voce inseriu uma posição fora do Top 5!!!\ninsira uma classificacão para a banda %s de 0 a 5 lugar\n", cinco[n].nome);
                 continue;
             }
             else
@@ -38,17 +38,16 @@ void preencher(banda cinco[], int n)
                         {
                             system("cls");
                             mensagem();
-                            j=1;
+                            j = 1;
                             break;
                         }
                     }
                 }
             }
             fflush(stdin);
-            if (j==1) {
-                continue; 
-            } 
             system("cls");
-        } while (cinco[n].classif < 0 || cinco[n].classif > 5);
+            if (j==1)
+                mensagem();
+        } while (cinco[n].classif < 0 || cinco[n].classif > 5 || j == 1);
     }
 }
