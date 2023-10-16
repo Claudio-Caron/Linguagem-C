@@ -7,6 +7,7 @@
 #include "preencher.h"
 #include "print.h"
 #include "solicitar.h"
+#include "gênero.h"
 #define N 5
 
 /*3. Para melhor compreensão, este exercício está dividido em subitens. Resolva todos os
@@ -29,6 +30,7 @@ as estruturas e todas as opções dos subitens anteriores.*/
 void imprimir(banda mam[], int i);
 void solicitar(banda esc[], int y);
 void preencher(banda cinco[], int n);
+void genero(banda gen[], int x);
 void mensagem();
 int main()
 {
