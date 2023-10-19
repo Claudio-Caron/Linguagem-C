@@ -7,7 +7,7 @@
 #include "preencher.h"
 #include "print.h"
 #include "solicitar.h"
-#include "gênero.h"
+#include "genero.h"
 #define N 5
 
 /*3. Para melhor compreensão, este exercício está dividido em subitens. Resolva todos os
