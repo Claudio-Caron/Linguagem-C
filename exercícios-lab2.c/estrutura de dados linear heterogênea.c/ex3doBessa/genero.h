@@ -16,6 +16,7 @@ void genero(banda gen[], int x)
         {
             pesqgen[j] = tolower(pesqgen[j]);
             gen[i].genero[j] = toupper(gen[i].genero[j]);
+
         }
 
         if (strcmp(gen[i].genero, pesqgen) == 0)
