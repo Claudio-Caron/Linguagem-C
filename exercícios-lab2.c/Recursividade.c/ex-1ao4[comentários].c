@@ -15,6 +15,7 @@ void rec(int a){
   	rec(valor);
   printf(" %d ", valor);
 }
+
 /* Resolução parcial:
 
     Empilha			    Desempilha
@@ -24,7 +25,7 @@ void rec(int a){
 4		rec(5)		    	0
 3		rec(10)				0
 2		rec(20)				0
-1       rec(40)			    20
+1     rec(40)			   20
 
 */
 
@@ -50,9 +51,9 @@ int rec1(int a){
 5	  1*rec1(0)					1*1
 4	  2*rec1(1)					2*1
 3	  3*rec1(2)					3*2
-2     4*rec1(3)				    4*6
-1       rec1(4)				    24
-
+2    4*rec1(3)  				4*6
+1    rec1(4)	   			24
+ 
 */
 
 //3. Dada a seguinte função:
@@ -103,6 +104,6 @@ int main()
 /*Resoluç~~ao parcial (o item a já está pronto)
 a) F2(2,7) = -3				b) F2(5,3) = ?				C) F2(15,3) = ?
 chamada		retorno			chamada,y		retorno		chamada, y		retorno
-F2(2,7)     -3              F2(2,6) 3		   ?		 	?				?
-							F2(5,3)  	       ?	 		?				?
+F2(2,7)     -3              F2(2,6) 3		              F2(5,3)
+							 
 											*/
