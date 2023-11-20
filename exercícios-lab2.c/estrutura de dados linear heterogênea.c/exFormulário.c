@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <locale.h>
 #define N 30
+
 typedef struct pront
 {
     float notas[2];
@@ -14,7 +15,7 @@ typedef struct pront
 void inicializar_index(pront *n, int i);
 void incluir(pront *n, int j);
 pront excluir(int *, pront *n);
-void imprimir(pront p, int j);
+void imprimir(pront *p, int j);
 int main(void)
 {
     pront *dados;
@@ -24,16 +25,17 @@ int main(void)
     {
         i--;
         printf("\tEscolha uma das opções de formulário:\n");
-        printf("\t\t\t[1]- INCLUIR PRONTUÁRIO\n\t\t\t[2]-IMPRIMIR ALUNOS EM ORDEM DE PRONTUÁRIO\n\t\t\t[3]-PESQUISAR PRONTUÁRIO\n\t\t\t[4]-ALTERAR PRONTUÁRIO\n\t\t\t[5]-EXCLUIR PRONTUÁRIO\n\t\t\t[6]-SAIR");
+        printf("\t\t\t[1]- INCLUIR PRONTUÁRIO\n\t\t\t[2]-IMPRIMIR ALUNOS EM ORDEM DE PRONTUÁRIO\n\t\t\t[3]-PESQUISAR PRONTUÁRIO\n\t\t\t[4]-ALTERAR PRONTUÁRIO\n\t\t\t[5]-EXCLUIR PRONTUÁRIO\n\t\t\t[6]-SAIR\n\n\t\t\t\t");
         scanf("%d", &op);
+        system ("cls");
         switch (op)
         {
         case 1:
             dados = malloc(sizeof(pront));
             j++;
-            incluir(&dados, j);
+            incluir(dados, j);
         case 2:
-            imprimir (*dados, j);
+            imprimir (dados, j);
         case 3:
 
         case 4:
@@ -50,7 +52,6 @@ int main(void)
 }
 void inicializar_index(pront *n, int i)
 {
-    int i;
     n[i].index = 0;
 }
 void incluir(pront *n, int j)
@@ -74,6 +75,14 @@ void incluir(pront *n, int j)
     n[j].notas[0] = nota1;
     n[j].notas[1] = nota2;
 }
-void imprimir(pront p, int j){
-    
+void imprimir(pront *p, int j){
+    int i;
+    system ("cls");
+    for (i=0; i<=j; i++){
+        printf ("\t\t\t--------------------\n");
+        printf ("\t\t\t|nome: %s           |\n", p[i].aluno);
+        printf ("\t\t\tNota 1: %.2f        |\n", p[i].notas[0]);
+        printf ("\t\t\tNota 2: %.2f        |\n", p[i].notas[1]);
+        printf ("\t\t\t---------------------\n");
+    }
 }
