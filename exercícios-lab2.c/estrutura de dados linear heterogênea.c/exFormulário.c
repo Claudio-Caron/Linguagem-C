@@ -13,18 +13,21 @@ typedef struct pront
     int index;
 } pront;
 void incluir(pront *n, int j);
-pront excluir(int *, pront *n)
-void imprimir(pront *p, int j);
+void alterar(pront *s, int n);
+void imprimirfor(pront *p, int j);
+int pesquisar(pront *s, int n);
+void mensagem(pront *, int i);
+void excluir(pront *, int n);
 int main(void)
 {
     pront dados[C];
-    int i, j = -1, op;
+    int i, j = -1, op, a;
     setlocale(LC_ALL, "Portuguese");
     for (i = 1; i != 3; i++)
     {
         i--;
         printf("\tEscolha uma das opções de formulário:\n");
-        printf("\t\t\t[1]-INCLUIR PRONTUÁRIO\n\t\t\t[2]-IMPRIMIR ALUNOS EM ORDEM DE PRONTUÁRIO\n\t\t\t[3]-PESQUISAR PRONTUÁRIO\n\t\t\t[4]-ALTERAR PRONTUÁRIO\n\t\t\t[5]-EXCLUIR PRONTUÁRIO\n\t\t\t[6]-SAIR\n\n\t\t\t\t");
+        printf("\t\t\t[1]-INCLUIR PRONTUÁRIO\n\t\t\t[2]-IMPRIMIR ALUNOS EM ORDEM DE PRONTUÁRIO\n\t\t\t[3]-PESQUISAR PRONTUÁRIO\n\t\t\t[4]-ALTERAR PRONTUÁRIO\n\t\t\t[5]-EXCLUIR PRONTUÁRIO\n\t\t\t[6]-SAIR\n\n\t\t");
         fflush(stdin);
         scanf("%d", &op);
         system("cls");
@@ -32,19 +35,40 @@ int main(void)
         {
         case 1:
             j++;
+            // incluir
             incluir(dados, j);
             break;
         case 2:
-            imprimir(dados, j);
+            // imprimir
+            imprimirfor(dados, j);
             break;
         case 3:
-
+            // pesquisar
+            a = pesquisar(dados, j);
+            break;
         case 4:
-
+            // alterar
+            alterar(dados, j);
+            break;
         case 5:
-
+            // excluir
+            system("cls");
+            do
+            {
+                printf("\t\t\tescolha qual ficha deseja excluir:\n\t\t\t\t");
+                fflush(stdin);
+                scanf("%i", &a);
+                a--;
+            } while (a > dados[j].index || a < 0);
+            excluir(dados, a);
+            system("cls");
+            printf("\t\t\tALUNO %s EXCLUIDO\n", dados[a - 1].aluno);
+            break;
         case 6:
             i = 3;
+            system("cls");
+            printf("\t\t\tENCERRADO!!!\n\n");
+            // sair
             break;
         default:
             printf("INSIRA UMA OPÇÃO VÁLIDA\n");
@@ -84,16 +108,53 @@ void incluir(pront *n, int j)
     n[j].index = j + 1;
     system("cls");
 }
-void imprimir(pront *p, int j)
+void imprimirfor(pront *p, int j)
 {
     int i;
     system("cls");
     for (i = 0; i <= j; i++)
     {
-        printf("----------------------------\n");
-        printf("|%i: %s                     | \n", p[i].index, p[i].aluno);
-        printf("|Nota 1: %.2f               | \n", p[i].notas[0]);
-        printf("|Nota 2: %.2f               | \n", p[i].notas[1]);
-        printf("----------------------------- \n\n");
+        mensagem(p, i);
     }
+}
+void alterar(pront *s, int n)
+{
+    int y;
+    // busca
+    y = pesquisar(s, n);
+    incluir(s, y);
+    // incluir
+    // fazer o loop com resposta 1 ou 0(outra resposta),
+    // quando escolher 1, alterar espaço do vetor de form escolhido pela chamada da função incluir
+}
+int pesquisar(pront *s, int n)
+{
+    system("cls");
+    int x;
+    do
+    {
+        system("cls");
+        imprimirfor(s, n);
+        printf("\t\t\tescolha um dos prontuários:\n");
+        fflush(stdin);
+        scanf("%d", &x);
+        x--;
+    } while (x > s[n].index || x < 0); // problema
+    system("cls");
+    mensagem(s, x);
+    return x;
+}
+void mensagem(pront *p, int i)
+{
+    printf("\t\t\t----------------------------\n");
+    printf("\t\t\t|%i: %s                     | \n", p[i].index, p[i].aluno);
+    printf("\t\t\t|Nota 1: %.2f               | \n", p[i].notas[0]);
+    printf("\t\t\t|Nota 2: %.2f               | \n", p[i].notas[1]);
+    printf("\t\t\t----------------------------- \n\n");
+}
+void excluir(pront *s, int n)
+{
+    strcpy(s[n - 1].aluno, "");
+    s[n - 1].notas[0] = 0;
+    s[n - 1].notas[1] = 0;
 }
