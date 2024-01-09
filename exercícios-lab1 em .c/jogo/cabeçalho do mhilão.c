@@ -2,7 +2,7 @@
 #include <windows.h>
 int main()
 {
-   /* int j;
+    int j;
     puts ("\t\t\t=======||  ||       || //=======\\  \\\\          //");
     puts ("\t\t\t||         ||       || ||       ||  \\\\        //");
     puts ("\t\t\t||======|| ||=======|| ||       ||   \\\\  /\\  //");
@@ -27,7 +27,7 @@ int main()
         printf (".");
         Sleep (1000);
     }
-    printf ("                                                               \n");*/
+    printf ("                                                               \n");
     int z, x = 9;
     char premios[10][40] = {
         "1:# Hiper Calórico",
