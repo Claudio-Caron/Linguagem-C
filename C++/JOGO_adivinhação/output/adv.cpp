@@ -1,34 +1,38 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 int main()
 {
-    int chute, certo, cont=0, tentativas;
+    int chute, cont = 0, tentativas;
     char difi;
-    certo = 42;
+    srand(time(NULL));
+    int certo = rand() % 100;
     cout.precision(2);
-    cout<<fixed;
+    cout << fixed;
     bool maior, verifica;
-    cout <<"*************************" << endl;
-    cout <<"***JOGO DA ADIVINHACAO***" << endl;
-    cout <<"*************************" << endl;
-    cout <<" ESCOLHA UM DIFICULDADE PARA INICIAR O JOGO\n(dificuldade baseada em quantidade de tentativas)"<<endl;
-    cout <<"_____________________________________" << endl;
-    cout <<"|Facil(F)  |  Medio(M)  |  Dificil  |"<<endl;
-    cout <<"-------------------------------------"<< endl;
-    cin >>difi;
-    switch(difi){
+    cout << "*************************" << endl;
+    cout << "***JOGO DA ADIVINHACAO***" << endl;
+    cout << "*************************" << endl;
+    cout << " ESCOLHA UM DIFICULDADE PARA INICIAR O JOGO\n(dificuldade baseada em quantidade de tentativas)" << endl;
+    cout << "_____________________________________" << endl;
+    cout << "|Facil(F)  |  Medio(M)  |  Dificil  |" << endl;
+    cout << "-------------------------------------" << endl;
+    cin >> difi;
+    switch (difi)
+    {
     case 'F':
-        tentativas=10;
+        tentativas = 10;
         break;
-    case'M':
-        tentativas=5;
+    case 'M':
+        tentativas = 5;
         break;
     case 'D':
-        tentativas=3;
+        tentativas = 3;
         break;
     default:
-        cout<< "Voce nao escolheu uma dificuldade valida!! acionado modo facil"<<endl;
-        tentativas=10;
+        cout << "Voce nao escolheu uma dificuldade valida!! acionado modo facil" << endl;
+        tentativas = 10;
         break;
     }
     while (tentativas)
@@ -44,7 +48,7 @@ int main()
         }
         else if (verifica)
         {
-            cout << "PARABENS!!!Voce acertou o numero secreto com " << cont<<" tentativas"<< endl;
+            cout << "PARABENS!!!Voce acertou o numero secreto com " << cont << " tentativas" << endl;
             break;
         }
         else
