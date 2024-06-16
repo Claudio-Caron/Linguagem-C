@@ -10,9 +10,9 @@
 
 using namespace std;
 struct Palavra{
-    int Tag;//S-W
-    int ConjuntoNaCache; //D
-    int PalavraNoBloco;// W
+    int Tag;//S-W um dos 2^tag
+    int ConjuntoNaCache; // um dos 2^D
+    int PalavraNoBloco;//um dos 2^ W
     float Dados;
     Palavra(int tag, int conjunto, int palavra, float dados)
         : Tag(tag), ConjuntoNaCache(conjunto), PalavraNoBloco(palavra), Dados(dados)
@@ -32,6 +32,10 @@ struct MP{
     int TamEmPalavra;
     int TamEmBloco;
     vector <Palavra> palavras;
+    int tag_bits;
+    int w_bits;
+    int d_bits;
+    int s_bits;;
 };
 
 struct Conjunto{
@@ -47,8 +51,14 @@ struct MemoriaCache{
     vector <Conjunto> Conjuntos;
     int TamConjunto;
     int TamcacheEmPalavra;
+    int substituicoes;
+    int acertos;// taxa de acertos será acertos/(substituicoes+acertos)
+    MemoriaCache(){
+        substituicoes=0;
+        acertos=0;
+    }
 };
-void EsvaziarMemoria(MP& memoria, MemoriaCache& cache);
+bool EsvaziarMemoria(MP& memoria, MemoriaCache& cache);
 void transformar ();
 void PainelDeAbertura();
 void PausePersonalizado(string mensagem);
@@ -59,9 +69,9 @@ char ConversoBinint();
 bool CompararTag();// (parâmetro)
 
 int LFU();
-void LerDados(MemoriaCache Cache);
+bool LerEnderecos(MemoriaCache& Cache, MP& memoria);
 
 
 
-bool preenchermemoria(float w, float d,float s, float tag, MP& memoria);
+void preenchermemoria(MP& memoria);
 void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache);

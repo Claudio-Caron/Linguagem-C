@@ -56,9 +56,9 @@ void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache){
     string Path;
     ifstream Arquivo;
     bool RedefinirTMemoria;
-    float w, d, s, tag;
-    int TamanhoLeitura, Tamanhos[4], i=0;
+    int TamanhoLeitura, Tamanhos[4], i;
     do{
+        i=0;
         cin.clear();
         cout << "Insira o nome do arquivo com os tamanhos das memórias : \n"<< endl;
         cin >> Path;
@@ -73,14 +73,15 @@ void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache){
             memoriaP.TamEmPalavra=(Tamanhos[0]*256);
             cache.TamcacheEmPalavra=(Tamanhos[2]/2);
             cache.TamConjunto=Tamanhos[3];
-
-            d = log2(cache.TamcacheEmPalavra / Tamanhos[3]);
-            w = log2(Tamanhos[1]);
+             Arquivo.close();
+            memoriaP.d_bits = log2(cache.TamcacheEmPalavra / Tamanhos[3]);
+            memoriaP.w_bits = log2(Tamanhos[1]);
             memoriaP.TamEmBloco = (memoriaP.TamEmPalavra / Tamanhos[1]);
-            s = log2(memoriaP.TamEmBloco);
-            tag = s-d;
-            EsvaziarMemoria(memoriaP, cache);
-            RedefinirTMemoria = preenchermemoria(w,d,s,tag,memoriaP); //Preencher memórias
+            memoriaP.s_bits = log2(memoriaP.TamEmBloco);
+            memoriaP.tag_bits =  memoriaP.s_bits-memoriaP.d_bits;
+            RedefinirTMemoria = EsvaziarMemoria(memoriaP, cache);
+            preenchermemoria(memoriaP); //Preencher memoria principal
+            Arquivo.close();
             cout<< "Arquivo com tamanhos de memoria lidos com sucesso!";
             if (RedefinirTMemoria){
                 cout<< "As memorias foram instanciadas!"<<endl;
@@ -95,20 +96,14 @@ void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache){
 
         }
     }while(!Arquivo.is_open());// ou tamanhos fora da faixa
-    Arquivo.close();
+   // Arquivo.close();
 }
-bool preenchermemoria(float w, float d,float s, float tag, MP& memoria ){
+void preenchermemoria(MP& memoria ){
     int i, j, k;
-    bool primeira;
-    if (memoria.palavras.empty())
-        primeira=true;
-    else
-        primeira=false;
-
     float x=0;//gerar aleatório
-    for (k=0;k<pow(2,tag);k++){
-        for(i=0; i<pow(2,d);i++){
-            for(j=0;j<pow(2,w);j++){
+    for (k=0;k<pow(2,memoria.tag_bits);k++){
+        for(i=0; i<pow(2,memoria.d_bits);i++){
+            for(j=0;j<pow(2,memoria.w_bits);j++){
                 //cout <<" tag : "<< k <<" d : "<< i <<" w : " << j<< endl;
                 x=x+2.47;
                 memoria.palavras.emplace_back(k,i,j,x);
@@ -122,12 +117,34 @@ bool preenchermemoria(float w, float d,float s, float tag, MP& memoria ){
     }else{
         cout<< "A memoria esta vazia"<< endl;
     }
-    return primeira;
 }
 
-void LerDados(MemoriaCache& Cache){
-    cout << "Como deseja\n 1 -> Por meio do teclado.\n 2 -> Por meio de arquivo com um ou mais enderecos." << endl;
-
+bool LerEnderecos(MemoriaCache& Cache, MP& memoria){
+    ifstream entradaArquivo;
+    string s;
+    vector <string> endereco;
+    int x=0;
+    while (x!=1 and x!=2){
+        cout << "Como deseja buscar endereco na cache? \n 1 -> Um endereco por meio do teclado.\n 2 -> Um ou mais enderecos por meio de arquivo." << endl;
+        cin >>  x;
+    }
+    if (x==1){
+        cout << " Insira o Endereco em Binario : "<< endl;
+        cin >> s;
+        //if (s.length == memoria.)
+        //teclado
+    }else{
+        cout << "Insira o nome do arquivo com a extensao .txt se estiver na pasta, senao, insira o caminho completo do arquivo  enderecos" << endl;
+        cin >> s;
+        entradaArquivo.open(s);
+        if (entradaArquivo.is_open()){
+            //executar a leitura e busca na cache
+        }else{
+            system ("cls");
+            cout << "Nao foi possivel abrir o arquivo de enderecos '"<< s << "' !"<< endl;
+        }
+        //ler arquivo com endereço em cada linha
+    }
 }
 
 
@@ -136,9 +153,16 @@ void PausePersonalizado(string mensagem){
     cout << mensagem;
     _getch();
 }
-void EsvaziarMemoria(MP& memoria, MemoriaCache& cache){
+bool EsvaziarMemoria(MP& memoria, MemoriaCache& cache){
+    bool primeira;
     if (!memoria.palavras.empty()){
+        primeira=false;
         memoria.palavras.clear();
         cache.Conjuntos.clear();
+    }else{
+        primeira=true;
     }
+    return primeira;
+
 }
+
