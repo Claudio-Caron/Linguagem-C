@@ -1,4 +1,3 @@
-
 #include "Definicoes.h"
 
 
@@ -143,9 +142,3 @@ void EsvaziarMemoria(MP& memoria, MemoriaCache& cache){
         cache.Conjuntos.clear();
     }
 }
-
-
-
-
-
-
