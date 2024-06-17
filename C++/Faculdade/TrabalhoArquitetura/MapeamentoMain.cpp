@@ -207,7 +207,7 @@ void LerEnderecos(MemoriaCache& Cache, MP& memoria){
     }
 }
 void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
-    int i, j;
+    int i, j, id;
     string aux;
     int tagbits, dbits, wbits, sbits;
     aux = ender.substr(0,memoria.tag_bits);
@@ -221,6 +221,7 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
     for (i=0;i<(cache.Conjuntos[dbits].Linhas.size());i++){
         if (cache.Conjuntos[dbits].Linhas[i].tag == tagbits){
             cache.acertos++;
+            cache.Conjuntos[dbits].Linhas[i].frequencia++;
             cout << "O endereco "<< ender << " Está na cache"<< endl;
             cout << "| Conjunto : " << dbits << " |\n| Linha: "<< i << " |" << endl;
             cout << "Palavras da linha : "<< endl;
@@ -232,9 +233,16 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
 
     }
     cout << "O endereco " << ender << "nao estava na cache ! ";
-    if (cache.TamConjunto==(cache.Conjuntos[dbits].Linhas.size())){
+    if (cache.TamConjunto==(cache.Conjuntos[dbits].Linhas.size())){ //testar trocar por i
+        id= LFU(cache.Conjuntos[dbits], cache.TamConjunto);
+        cache.Conjuntos[dbits].Linhas[id].frequencia=0;
+        for (j=0;j<memoria.w_bits;j++){
+            cache.Conjuntos[dbits].Linhas[id].palavrasNaLinha[j]=memoria.palavras[sbits+j];
+        }
+        cache.substituicoes++;
+        cout<< "LFU utilizado"<< endl;
+        cout << "A linha "<<id<<  " foi substituida" << endl;
 
-        //usar lfu
     }else{
         for (j=0;j<memoria.w_bits;j++){
             cache.Conjuntos[dbits].Linhas[i].palavrasNaLinha.push_back(memoria.palavras[sbits+j]);
@@ -243,4 +251,12 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
 
     //nao esta na cache, buscar na memória
 }
-int LFU()
+
+int LFU(Conjunto c, int tam){ //passar o conjunto e (o tamanho do conjunto ou Linhas.size)
+    int i, menosfrequente=c.Linhas[0].frequencia;
+    for (i=0;i<tam; i++){
+        if (c.Linhas[i].frequencia<menosfrequente)
+            menosfrequente=c.Linhas[i].frequencia;
+    }
+    return menosfrequente;
+}

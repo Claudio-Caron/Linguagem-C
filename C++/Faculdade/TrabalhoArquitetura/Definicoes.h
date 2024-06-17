@@ -20,7 +20,7 @@ struct Palavra{
          }
 
     string Endereco (){
-        return " | Tag : "+ to_string (Tag)+ " | Conjunto na Cache : "+ to_string(ConjuntoNaCache)+ " | Palavra no Bloco : "+ to_string(PalavraNoBloco);
+        return "\n\t\t\t    | Tag : "+ to_string (Tag)+ " | \n\t\t\t    | Conjunto na Cache : "+ to_string(ConjuntoNaCache)+ " | \n\t\t\t    | Palavra no Bloco : "+ to_string(PalavraNoBloco) + " | \n\t\t\t    | Dados : "+ to_string(Dados)+ " | \n";
     }
     /*string MostrarEndereco(){
      //   return to_string(Tag)+to_string(ConjuntoNaCache)+to_string(PalavraNoBloco);
@@ -39,7 +39,11 @@ struct MP{
 };
 struct Linha{
     int tag;
+    int frequencia;
     vector <Palavra> palavrasNaLinha;
+    Linha(){
+        frequencia=0;
+    }
 };
 struct Conjunto{
     //bool utilizado;
@@ -70,7 +74,7 @@ char ConversoBinint();
 //MP inicializarMp(MP mp);
 bool CompararTag();// (parâmetro)
 
-int LFU();
+int LFU(Conjunto c, int tam);
 void LerEnderecos(MemoriaCache& Cache, MP& memoria);
 
 
