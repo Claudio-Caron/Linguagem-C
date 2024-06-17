@@ -62,15 +62,14 @@ bool EsvaziarMemoria(MP& memoria, MemoriaCache& cache);
 void transformar ();
 void PainelDeAbertura();
 void PausePersonalizado(string mensagem);
-void opcoes();
+void opcoes(MP& memoria, MemoriaCache& cache);
 int ConversorBinchar ();
 char ConversoBinint();
 //MP inicializarMp(MP mp);
 bool CompararTag();// (parâmetro)
 
 int LFU();
-bool LerEnderecos(MemoriaCache& Cache, MP& memoria);
-
+void LerEnderecos(MemoriaCache& Cache, MP& memoria);
 
 
 void preenchermemoria(MP& memoria);
