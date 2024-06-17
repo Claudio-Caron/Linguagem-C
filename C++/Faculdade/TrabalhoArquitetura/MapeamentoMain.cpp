@@ -207,24 +207,40 @@ void LerEnderecos(MemoriaCache& Cache, MP& memoria){
     }
 }
 void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
-    int i;
+    int i, j;
     string aux;
-    int tagbits, dbits, wbits;
+    int tagbits, dbits, wbits, sbits;
     aux = ender.substr(0,memoria.tag_bits);
     tagbits = stoi(aux, nullptr, 2);
     aux = ender.substr(memoria.tag_bits, memoria.d_bits);
     dbits = stoi(aux, nullptr, 2);
     aux = ender.substr((memoria.d_bits+memoria.tag_bits), memoria.w_bits);
     wbits = stoi(aux, nullptr, 2);
+    aux = ender.substr(0, memoria.s_bits);
+    sbits = stoi(aux, nullptr, 2);
     for (i=0;i<(cache.Conjuntos[dbits].Linhas.size());i++){
         if (cache.Conjuntos[dbits].Linhas[i].tag == tagbits){
             cache.acertos++;
             cout << "O endereco "<< ender << " Está na cache"<< endl;
             cout << "| Conjunto : " << dbits << " |\n| Linha: "<< i << " |" << endl;
-            cout << "Palavras da linha : "
+            cout << "Palavras da linha : "<< endl;
+            for (j=0;j<cache.Conjuntos[dbits].Linhas[i].palavrasNaLinha.size();j++){
+                cout << cache.Conjuntos[dbits].Linhas[i].palavrasNaLinha[j].Endereco() << endl;
+            }
             return;
         }
 
     }
+    cout << "O endereco " << ender << "nao estava na cache ! ";
+    if (cache.TamConjunto==(cache.Conjuntos[dbits].Linhas.size())){
+
+        //usar lfu
+    }else{
+        for (j=0;j<memoria.w_bits;j++){
+            cache.Conjuntos[dbits].Linhas[i].palavrasNaLinha.push_back(memoria.palavras[sbits+j]);
+        }
+    }
+
     //nao esta na cache, buscar na memória
 }
+int LFU()
