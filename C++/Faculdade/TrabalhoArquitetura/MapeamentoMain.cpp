@@ -83,6 +83,7 @@ void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache){
             memoriaP.tag_bits =  memoriaP.s_bits-memoriaP.d_bits;
             RedefinirTMemoria = EsvaziarMemoria(memoriaP, cache);
             preenchermemoria(memoriaP); //Preencher memoria principal
+            preenchercache(cache); // definir quantidade de conjuntos
             cout<< "Arquivo com tamanhos de memoria lidos com sucesso!";
             if (RedefinirTMemoria){
                 cout<< "As memorias foram instanciadas!"<<endl;
