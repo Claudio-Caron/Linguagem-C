@@ -185,8 +185,10 @@ void LerEnderecos(MemoriaCache& Cache, MP& memoria){
                 }
             }
         }
-        i=stoi(s, nullptr, 2);
-        cout << "Teste de Conversao : Endereco lido : " << i <<  endl;
+       // i=stoi(s, nullptr, 2);
+        //cout << "Teste de Conversao : Endereco lido : " << i <<  endl;
+        system ("cls");
+        VerificarCache(s,memoria, Cache);
         PausePersonalizado("Pressione qualquer tecla para retornar ao menu ");
 
     }else{  //  modularizar
@@ -206,18 +208,24 @@ void LerEnderecos(MemoriaCache& Cache, MP& memoria){
         entradaArquivo.close();
     }
 }
+
 void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
-    int i, j, id;
+    int i, j, id, k;
     string aux;
     int tagbits, dbits, wbits, sbits;
+
     aux = ender.substr(0,memoria.tag_bits);
     tagbits = stoi(aux, nullptr, 2);
+
     aux = ender.substr(memoria.tag_bits, memoria.d_bits);
     dbits = stoi(aux, nullptr, 2);
+
     aux = ender.substr((memoria.d_bits+memoria.tag_bits), memoria.w_bits);
     wbits = stoi(aux, nullptr, 2);
+
     aux = ender.substr(0, memoria.s_bits);
     sbits = stoi(aux, nullptr, 2);
+
     for (i=0;i<(cache.Conjuntos[dbits].Linhas.size());i++){
         if (cache.Conjuntos[dbits].Linhas[i].tag == tagbits){
             cache.acertos++;
@@ -232,11 +240,13 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
         }
 
     }
-    cout << "O endereco " << ender << "nao estava na cache ! ";
-    if (cache.TamConjunto==(cache.Conjuntos[dbits].Linhas.size())){ //testar trocar por i
+    cout << "O endereco '" << ender << "' nao estava na cache ! " << endl;
+    if (cache.TamConjunto == cache.Conjuntos[dbits].Linhas.size()){ //testar trocar por i
+        cout<< "entrou no if" << endl;
+        system ("pause");
         id= LFU(cache.Conjuntos[dbits], cache.TamConjunto);
-        cache.Conjuntos[dbits].Linhas[id].frequencia=0;
-        for (j=0;j<memoria.w_bits;j++){
+        cache.Conjuntos[dbits].Linhas[id].frequencia=1;
+        for (j=0;j<pow(2,memoria.w_bits);j++){
             cache.Conjuntos[dbits].Linhas[id].palavrasNaLinha[j]=memoria.palavras[sbits+j];
         }
         cache.substituicoes++;
@@ -244,12 +254,18 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
         cout << "A linha "<<id<<  " foi substituida" << endl;
 
     }else{
-        for (j=0;j<memoria.w_bits;j++){
-            cache.Conjuntos[dbits].Linhas[i].palavrasNaLinha.push_back(memoria.palavras[sbits+j]);
+        cout<< "entrou no else" << endl;
+        system ("pause");
+        Linha novaLinha;
+        novaLinha.tag = tagbits;
+        for (j = 0; j < pow(2, memoria.w_bits); j++) {
+            novaLinha.palavrasNaLinha.push_back(memoria.palavras[sbits + j]);
         }
-    }
 
-    //nao esta na cache, buscar na memória
+        //imprimir o bloco que foi trazido para a cache;
+        cache.Conjuntos[dbits].Linhas.push_back(novaLinha);
+        cache.Conjuntos[dbits].Linhas[cache.Conjuntos[dbits].Linhas.size() -1].frequencia=1;
+    }
 }
 
 int LFU(Conjunto c, int tam){ //passar o conjunto e (o tamanho do conjunto ou Linhas.size)
