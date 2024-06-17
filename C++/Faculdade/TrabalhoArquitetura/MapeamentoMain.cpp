@@ -38,6 +38,7 @@
         system ("cls");
         LerEnderecos(cache, memoria);
         //Inserir endereço para verificar taxa de acerto e falha na cache
+        break;
     case 2:
         system ("cls");
         DefinirTamanhos(memoria, cache);
@@ -94,10 +95,15 @@ void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache){
             system ("cls");
             cout << "*** Erro ao abrir o Arquivo '"<< Path << "'! ***"<< endl;
 
+
         }
     }while(!Arquivo.is_open());// ou tamanhos fora da faixa
     Arquivo.close();
 }
+void preenchercache(MemoriaCache& cache){
+    cache.Conjuntos.resize(cache.TamConjunto);
+}
+
 void preenchermemoria(MP& memoria ){
     int i, j, k;
     float x=0;//gerar aleatório
@@ -183,6 +189,8 @@ void LerEnderecos(MemoriaCache& Cache, MP& memoria){
         PausePersonalizado("Pressione qualquer tecla para retornar ao menu ");
 
     }else{  //  modularizar
+
+        do {
         cout << "Insira o nome do arquivo com a extensao .txt se estiver na pasta, senao, insira o caminho completo do arquivo  enderecos" << endl;
         cin >> s;
         entradaArquivo.open(s);
@@ -190,9 +198,11 @@ void LerEnderecos(MemoriaCache& Cache, MP& memoria){
             //executar a leitura e busca na cache
         }else{
             system ("cls");
-            cout << "Nao foi possivel abrir o arquivo de enderecos '"<< s << "' !"<< endl;
+            cout << "Nao foi possivel abrir o arquivo '"<< s << "'  de enderecos !"<< endl;
         }
         //ler arquivo com endereço em cada linha
+        }while(!entradaArquivo.is_open());
+        entradaArquivo.close();
     }
 }
 void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
@@ -203,5 +213,9 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
     tagbits = stoi(aux, nullptr, 2);
     aux = ender.substr(memoria.tag_bits, memoria.d_bits);
     dbits = stoi(aux, nullptr, 2);
-    aux = ender.substr(memoria.d_bits, ender.size());
+    aux = ender.substr((memoria.d_bits+memoria.tag_bits), memoria.w_bits);
+    wbits = stoi(aux, nullptr, 2);
+    for (i=0;i<(cache.Conjuntos[dbits].Linhas.size());i++){
+        cout << "funcionou";
+    }
 }

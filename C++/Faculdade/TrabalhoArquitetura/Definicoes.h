@@ -37,11 +37,13 @@ struct MP{
     int d_bits;
     int s_bits;;
 };
-
-struct Conjunto{
+struct Linha{
     int tag;
+    vector <Palavra> palavrasNaLinha;
+};
+struct Conjunto{
     //bool utilizado;
-    vector <Palavra> Linhas;
+    vector <Linha> Linhas;
     /*Conjunto (){
         utilizado=true;
     }*/
@@ -74,3 +76,5 @@ void LerEnderecos(MemoriaCache& Cache, MP& memoria);
 
 void preenchermemoria(MP& memoria);
 void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache);
+void VerificarCache(string ender, MP& memoria, MemoriaCache& cache);
+void preenchercache(MemoriaCache& cache);
