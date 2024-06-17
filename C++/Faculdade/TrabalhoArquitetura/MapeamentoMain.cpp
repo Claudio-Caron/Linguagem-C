@@ -217,6 +217,14 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
     aux = ender.substr((memoria.d_bits+memoria.tag_bits), memoria.w_bits);
     wbits = stoi(aux, nullptr, 2);
     for (i=0;i<(cache.Conjuntos[dbits].Linhas.size());i++){
-        cout << "funcionou";
+        if (cache.Conjuntos[dbits].Linhas[i].tag == tagbits){
+            cache.acertos++;
+            cout << "O endereco "<< ender << " Está na cache"<< endl;
+            cout << "| Conjunto : " << dbits << " |\n| Linha: "<< i << " |" << endl;
+            cout << "Palavras da linha : "
+            return;
+        }
+
     }
+    //nao esta na cache, buscar na memória
 }
