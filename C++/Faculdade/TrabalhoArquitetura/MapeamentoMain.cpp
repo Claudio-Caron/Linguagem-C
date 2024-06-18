@@ -74,7 +74,7 @@ void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache){
             }
 
             memoriaP.TamEmPalavra=(Tamanhos[0]*256);
-            cache.TamcacheEmPalavra=(Tamanhos[2]/2);
+            cache.TamcacheEmPalavra=(Tamanhos[2]/2);//consertar isso!!!
             cache.TamConjunto=Tamanhos[3];
             memoriaP.d_bits = log2(cache.TamcacheEmPalavra / Tamanhos[3]);
             memoriaP.w_bits = log2(Tamanhos[1]);

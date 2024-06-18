@@ -20,7 +20,7 @@ struct Palavra{
          }
 
     string Endereco (){
-        return "\n\t\t\t    | Tag : "+ to_string (Tag)+ "\n\t\t\t    | Conjunto na Cache : "+ to_string(ConjuntoNaCache)+ "\n\t\t\t    | Palavra no Bloco : "+ to_string(PalavraNoBloco) + "\n\t\t\t    | Dados : "+ to_string(Dados)+ "\n";
+        return "\n\t\t\t    | Tag : "+ to_string (Tag)+ "\n\t\t\t    | Conjunto na Cache : "+ to_string(ConjuntoNaCache)+ "\n\t\t\t    | Palavra no Bloco : "+ to_string(PalavraNoBloco) + "\n\t\t\t    | Dado : "+ to_string(Dados)+ "\n";
     }
     /*string MostrarEndereco(){
      //   return to_string(Tag)+to_string(ConjuntoNaCache)+to_string(PalavraNoBloco);
