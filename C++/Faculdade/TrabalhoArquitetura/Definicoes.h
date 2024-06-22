@@ -7,6 +7,7 @@
 #include <conio.h>
 #include <iostream>
 #include <string>
+#include <clocale>
 
 using namespace std;
 struct Palavra{
@@ -56,7 +57,7 @@ struct Conjunto{
 struct MemoriaCache{
     vector <Conjunto> Conjuntos;
     int TamConjunto;
-    int TamcacheEmPalavra;
+    int TamcacheEmLinha;
     int substituicoes;
     int acertos;// taxa de acertos será acertos/(substituicoes+acertos)
     MemoriaCache(){
