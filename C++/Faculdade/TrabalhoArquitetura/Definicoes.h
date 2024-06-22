@@ -83,3 +83,4 @@ void preenchermemoria(MP& memoria);
 void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache);
 void VerificarCache(string ender, MP& memoria, MemoriaCache& cache);
 void preenchercache(MemoriaCache& cache);
+bool VerificarTamanhos(int NumeroDeLinhas, int Tamanhos[], int n);

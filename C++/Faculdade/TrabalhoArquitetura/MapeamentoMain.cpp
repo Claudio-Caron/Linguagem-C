@@ -57,7 +57,6 @@
 void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache){
     //controlar a entrada de tamanho -> if tal tamanho do vetor tamanhos ser incorreto, mostrar a mensagem e dar o continue
     string Path;
-    bool tam_memoria=true;
     ifstream Arquivo;
     bool RedefinirTMemoria;
     int TamanhoLeitura, Tamanhos[4], i=0;
@@ -72,17 +71,18 @@ void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache){
                 cout << TamanhoLeitura << endl;
                 i++;
             }
-            if (Tamanhos[0]>256){
-                cout << " *** O tamanho da memoria, lido na primeira linha do arquivo inserido, possui valor acima do permitido ! ***" << endl;
-            }
-            if (Tamanhos[1]!=2 or Tamanhos[1]!=4 or Tamanhos[1]!=8){
-                    cout <<"*** A quantidade de palavras, lido na segunda linha do arquivo, possui valores invalidos !***"<< endl;
-            }
             memoriaP.TamEmPalavra=(Tamanhos[0]*256);
             cache.TamConjunto=Tamanhos[3];
             memoriaP.w_bits = log2(Tamanhos[1]);
             memoriaP.TamEmBloco = (memoriaP.TamEmPalavra / Tamanhos[1]);
             cache.TamcacheEmLinha =((Tamanhos[2]*256)/Tamanhos[1]);
+            if (VerificarTamanhos(cache.TamcacheEmLinha, Tamanhos, 4)){
+                PausePersonalizado("\t~~Pressione qualquer tecla para inserir novamente o arquivo de tamanhos~~");
+                system ("cls");
+                i=0;
+                Arquivo.close();
+                continue;
+            }
             memoriaP.d_bits = log2(cache.TamcacheEmLinha / cache.TamConjunto);
             memoriaP.s_bits = log2(memoriaP.TamEmBloco);
             memoriaP.tag_bits =  memoriaP.s_bits-memoriaP.d_bits;
@@ -133,7 +133,7 @@ void preenchermemoria(MP& memoria ){
 
 
 void PausePersonalizado(string mensagem){
-    cout << mensagem;
+    cout << mensagem  ;
     _getch();
 }
 bool EsvaziarMemoria(MP& memoria, MemoriaCache& cache){
@@ -283,4 +283,24 @@ int LFU(Conjunto c, int tam){ //transformar em um método na struct conjunto
             id = i;
     }
     return id;
+}
+bool VerificarTamanhos(int NumeroDeLinhas, int Tamanhos[], int n){
+    bool erro=false;
+    if (Tamanhos[0]>256){
+        cout << "\t*** | O tamanho da memoria, lido na primeira linha do arquivo inserido, possui valor acima do permitido ! | ***\n" << endl;
+        erro=true;
+    }
+    if (Tamanhos[1]!=2 and Tamanhos[1]!=4 and Tamanhos[1]!=8){
+        cout <<"\t*** | A quantidade de palavras, lido na segunda linha do arquivo, possui valores invalidos ! | ***\n"<< endl;
+        erro=true;
+    }
+    if (Tamanhos[2]> 32){
+        cout << "\t*** | O tamanho da Cache, lido na terceira linha do arquivo, possui tamanho maior que o permitido ! | ***\n" << endl;
+        erro=true;
+    }
+    if (Tamanhos[3]<2 or Tamanhos[3]>(NumeroDeLinhas/2)){
+        cout << "\t*** | O Numero de linhas por conjunto da cache ,lido na quarta linha do Arquivo, está fora do limite permitido ! | ***"<< endl;
+        erro=true;
+    }
+    return erro;
 }
