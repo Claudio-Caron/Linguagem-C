@@ -248,9 +248,9 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
             return;
         }
     }
-    cout << "O endereco '" << ender << "' nao estava na cache ! " << endl;
+    cout << "O endereco '" << ender<< "' nao estava na cache ! " << endl;
     if (cache.TamConjunto == cache.Conjuntos[dbits].Linhas.size()){ //testar trocar por i
-        cout<< "entrou no if ( usar lfu)" << endl;// tirar
+     //   cout<< "entrou no if ( usar lfu)" << endl;
         system ("pause");
         id= LFU(cache.Conjuntos[dbits], cache.TamConjunto);
         cache.Conjuntos[dbits].Linhas[id].frequencia=1;
@@ -264,14 +264,15 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
     }else{
         Linha novaLinha;
         novaLinha.tag = tagbits;
+        cout << " Linhas adicionadas : " <<endl;
         for (j = 0; j < pow(2, memoria.w_bits); j++) {
             novaLinha.palavrasNaLinha.push_back(memoria.palavras[(sbits*pow(2,memoria.w_bits)) + j]);
-            cout << " Linhas adicionadas : " << memoria.palavras[(sbits*pow(2,memoria.w_bits)) + j].Endereco()<< endl;
+            cout << memoria.palavras[(sbits*pow(2,memoria.w_bits)) + j].Endereco()<< endl;
         }
         //imprimir o bloco que foi trazido para a cache;
         cache.Conjuntos[dbits].Linhas.push_back(novaLinha);
         cache.Conjuntos[dbits].Linhas[cache.Conjuntos[dbits].Linhas.size() -1].frequencia=1;
-        cout<< "O endereco : "<< ender <<" foi adicionado na cache" << endl;
+        cout<< "O endereco foi adicionado na cache" << endl;
     }
 }
 
