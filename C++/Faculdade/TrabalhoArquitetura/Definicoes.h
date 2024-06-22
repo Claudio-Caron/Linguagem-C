@@ -8,13 +8,15 @@
 #include <iostream>
 #include <string>
 #include <clocale>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 struct Palavra{
     int Tag;//S-W um dos 2^tag
     int ConjuntoNaCache; // um dos 2^D
     int PalavraNoBloco;//um dos 2^ W
-    float Dados;
+    int Dados;
     Palavra(int tag, int conjunto, int palavra, float dados)
         : Tag(tag), ConjuntoNaCache(conjunto), PalavraNoBloco(palavra), Dados(dados)
          {
