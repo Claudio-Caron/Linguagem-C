@@ -10,8 +10,10 @@
 #include <clocale>
 #include <cstdlib>
 #include <ctime>
+#include <bitset>
 
 using namespace std;
+
 struct Palavra{
     int Tag;//S-W um dos 2^tag
     int ConjuntoNaCache; // um dos 2^D
@@ -25,10 +27,6 @@ struct Palavra{
     string Endereco (){
         return "\n\t\t\t    | Tag : "+ to_string (Tag)+ "\n\t\t\t    | Conjunto na Cache : "+ to_string(ConjuntoNaCache)+ "\n\t\t\t    | Palavra no Bloco : "+ to_string(PalavraNoBloco) + "\n\t\t\t    | Dado : "+ to_string(Dados)+ "\n";
     }
-    /*string MostrarEndereco(){
-     //   return to_string(Tag)+to_string(ConjuntoNaCache)+to_string(PalavraNoBloco);
-    }*/
-    //função para calcular o endereço completo e retornar em string em binário(solução no zap)
 };
 
 struct MP{
@@ -39,6 +37,13 @@ struct MP{
     int w_bits;
     int d_bits;
     int s_bits;;
+    //implementar impressão
+    void ImprimirMemoria(){
+        int k;
+        for (k=0;k<palavras.size();k++){
+            cout << palavras[k].Endereco() << endl;
+        }
+    }
 };
 struct Linha{
     int tag;
@@ -66,6 +71,7 @@ struct MemoriaCache{
         substituicoes=0;
         acertos=0;
     }
+    //implementar impressão
 };
 bool EsvaziarMemoria(MP& memoria, MemoriaCache& cache);
 void transformar ();
