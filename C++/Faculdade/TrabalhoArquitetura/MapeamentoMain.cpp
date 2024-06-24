@@ -54,16 +54,20 @@
         break;
     case 0 :
         //sair
-        cout << "\t\t\t\t|\\\\ MEMORIAS RESULTANTES : ///|"
+        cout << "\t\t\t\t|\\\\ MEMORIAS RESULTANTES : ///|"<< endl;
         memoria.ImprimirMemoria();
         cache.Imprimir();
-        cout << "\n -> Taxa de acertos : " <<  cache.acertos/(cache.acertos+cache.falhas+cache.substituicoes)<< " %" <<endl;
-        cout << " -> Substituicoes realizadas : "<< cache.substituicoes << endl;
-        cout << "Taxa de falhas : " cache.falhas/(cache.falhas + cache.acertos + cache.substituicoes) << " %"<< endl;
-        cout << "\n ----------------------" endl;
-        cout << " | SIMULADOR ENCERRADO|"<< endl;
-        cout << " ----------------------" endl;
+        if (cache.acertos+cache.falhas+cache.substituicoes!=0){
+            cout << "\n -> Taxa de acertos : " <<  (cache.acertos/(cache.acertos+cache.falhas+cache.substituicoes))*100<< " %" <<endl;
+            cout << " -> Substituicoes realizadas : "<< cache.substituicoes << endl;
+            cout << "Taxa de falhas : " << (cache.falhas/(cache.falhas + cache.acertos + cache.substituicoes))*100 << " %"<< endl;
+        }else{
 
+        }
+
+        cout << "\n ----------------------"<< endl;
+        cout << " | SIMULADOR ENCERRADO|"<< endl;
+        cout << " ----------------------"<< endl;
         break;
     default :
         PausePersonalizado("Opcao invalida! insira qualquer tecla para retornar ao menu.");
