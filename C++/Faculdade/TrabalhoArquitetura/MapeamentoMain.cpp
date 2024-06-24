@@ -34,28 +34,36 @@
         cout << "\t\t\t  2 -> Redefinir tamanhos de memorias\n\t\t\t";
         cout << "  3 -> Imprimir Memoria Principal\n\t\t\t  4 -> Imprimir Memoria Cache\n\t\t\t  0 -> X-SAIR-X\n" << endl;
         cin >> x;
+        system ("cls");
     switch (x){
     case 1 :
-        system ("cls");
         LerEnderecos(cache, memoria);
         //Inserir endereço para verificar taxa de acerto e falha na cache
         break;
     case 2 :
-        system ("cls");
         DefinirTamanhos(memoria, cache);
         //Redefinir tamanhos(Deletar vetores
         break;
     case 3 :
-        system ("cls");
         memoria.ImprimirMemoria();
         PausePersonalizado("\n -> Pressione qualquer tecla para retornar ao menu");
         break;
     case 4 :
+        cache.Imprimir();
+        PausePersonalizado("\n -> Pressione qualquer tecla para retornar ao menu");
         break;
     case 0 :
         //sair
-        system ("cls");
-        cout << "SIMULADOR ENCERRADO"<< endl;
+        cout << "\t\t\t\t|\\\\ MEMORIAS RESULTANTES : ///|"
+        memoria.ImprimirMemoria();
+        cache.Imprimir();
+        cout << "\n -> Taxa de acertos : " <<  cache.acertos/(cache.acertos+cache.falhas+cache.substituicoes)<< " %" <<endl;
+        cout << " -> Substituicoes realizadas : "<< cache.substituicoes << endl;
+        cout << "Taxa de falhas : " cache.falhas/(cache.falhas + cache.acertos + cache.substituicoes) << " %"<< endl;
+        cout << "\n ----------------------" endl;
+        cout << " | SIMULADOR ENCERRADO|"<< endl;
+        cout << " ----------------------" endl;
+
         break;
     default :
         PausePersonalizado("Opcao invalida! insira qualquer tecla para retornar ao menu.");
@@ -153,6 +161,9 @@ bool EsvaziarMemoria(MP& memoria, MemoriaCache& cache){
         primeira=false;
         memoria.palavras.clear();
         cache.Conjuntos.clear();
+        cache.acertos=0;
+        cache.falhas=0;
+        cache.substituicoes=0;
     }else{
         primeira=true;
     }
@@ -211,23 +222,17 @@ void LerEnderecos(MemoriaCache& Cache, MP& memoria){
         if (x==2){
             system ("cls");
             do {
-            cout << " -> Insira o nome do arquivo com a extensao .txt se estiver na pasta\n -> Ou insira o caminho completo do arquivo de enderecos\n" << endl;
+            cout << " -> Insira o nome do arquivo com a extensao .txt se estiver na pasta\n -> Ou insira o caminho completo do arquivo de enderecos (sem aspas)\n" << endl;
             cout << " # Cada endereco do arquivo deve conter "<< (memoria.s_bits+memoria.w_bits) <<" bits #"<<endl;
             cout << " ~ Para retornar ao menu, insira 0 ~" << endl;
             cin >> s;
             entradaArquivo.open(s);
             if (entradaArquivo.is_open()){
                 i=0;
-                system ("cls");
-               while (entradaArquivo>>s){
-                    i++;
-                }
-                entradaArquivo.clear();
-                entradaArquivo.seekg(0,ios:: beg);
-                a=i;
                 while (entradaArquivo>>s){
-                    i--;
+                    i++;
                     certo=true;
+                    system ("cls");
                     if (s.size()!= (memoria.s_bits+memoria.w_bits)){
                         cout << "* Esse endereco possui "<< s.size() << " bits ! *"<< endl;
                         certo=false;
@@ -242,10 +247,9 @@ void LerEnderecos(MemoriaCache& Cache, MP& memoria){
                     if (certo)
                         VerificarCache(s,memoria, Cache);
                     else
-                        cout << "\n X - O endereco "<< s <<" dessa linha de arquivo ("<< a-i<<" linha) foi ignorado no mapeamento - X\n" << endl;
+                        cout << "\n X - O endereco "<< s <<" dessa linha de arquivo ("<< i<<" linha) foi ignorado no mapeamento - X\n" << endl;
                     if (i>=0){
                         PausePersonalizado("\n -> Pressione qualquer tecla para prosseguir para o proximo endereco do arquivo");
-                        system ("cls");
                     }else{
                         PausePersonalizado("\n -> Ultimo endereco do arquivo foi lido ! Pressione qualquer tecla para retornar ao menu");
                         system ("cls");
@@ -282,7 +286,7 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
     sbits = stoi(aux, nullptr, 2);
 
     for (i=0;i<(cache.Conjuntos[dbits].Linhas.size());i++){
-        if (cache.Conjuntos[dbits].Linhas[i].tag == tagbits and cache.Conjuntos[dbits].Linhas.size()>0){
+        if (cache.Conjuntos[dbits].Linhas[i].tag == tagbits){
             cache.acertos++;
             cache.Conjuntos[dbits].Linhas[i].frequencia++;
             cout << " # O endereco "<< ender << " esta na cache # \n"<< endl;
@@ -302,9 +306,13 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
             cache.Conjuntos[dbits].Linhas[id].palavrasNaLinha[j]=memoria.palavras[(sbits*pow(2,memoria.w_bits))+ j];
         }
         cache.substituicoes++;
-        cout<< " * LFU utilizado *"<< endl;
-        cout << " # A linha "<<id<<  " foi substituida #\n" << endl;
-
+        cout<< " >>> LFU utilizado <<<"<< endl;
+        cout << " * A linha "<<id<<  " foi substituida *\n" << endl;
+        cout << " -> Palavras adicionadas : " <<endl;
+        for (j = 0; j < pow(2, memoria.w_bits); j++) {
+            cout << memoria.palavras[(sbits*pow(2,memoria.w_bits)) + j].Endereco()<< endl;
+        }
+        cout<< "\n # O bloco '"<< sbits << "' foi adicionado na cache # \n" << endl;
     }else{
         Linha novaLinha;
         novaLinha.tag = tagbits;
@@ -313,6 +321,7 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
             novaLinha.palavrasNaLinha.push_back(memoria.palavras[(sbits*pow(2,memoria.w_bits)) + j]);
             cout << memoria.palavras[(sbits*pow(2,memoria.w_bits)) + j].Endereco()<< endl;
         }
+        cache.falhas++;
         //imprimir o bloco que foi trazido para a cache;
         cache.Conjuntos[dbits].Linhas.push_back(novaLinha);
         cache.Conjuntos[dbits].Linhas[cache.Conjuntos[dbits].Linhas.size() -1].frequencia=1;
@@ -323,9 +332,10 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
 int LFU(Conjunto c, int tam){ //transformar em um método na struct conjunto
     int i, id=0, menosfrequente=c.Linhas[0].frequencia;
     for (i=0;i<tam; i++){
-        if (c.Linhas[i].frequencia<menosfrequente)
+        if (c.Linhas[i].frequencia<menosfrequente){
             menosfrequente=c.Linhas[i].frequencia;
             id = i;
+        }
     }
     return id;
 }

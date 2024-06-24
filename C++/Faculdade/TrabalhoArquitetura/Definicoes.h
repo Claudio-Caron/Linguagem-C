@@ -50,7 +50,7 @@ struct Linha{
     int frequencia;
     vector <Palavra> palavrasNaLinha;
     Linha(){
-        frequencia=0;
+        frequencia=1;
     }
 };
 struct Conjunto{
@@ -64,12 +64,28 @@ struct Conjunto{
 struct MemoriaCache{
     vector <Conjunto> Conjuntos;
     int TamConjunto;
+    int falhas;
     int TamcacheEmLinha;
     int substituicoes;
     int acertos;// taxa de acertos será acertos/(substituicoes+acertos)
     MemoriaCache(){
         substituicoes=0;
         acertos=0;
+        falhas=0;
+    }
+    void Imprimir(){
+        int i, j, k;
+        for (i=0;i<Conjuntos.size(); i++){
+            cout << "<Conjunto "<< i << ">\n"<<endl;
+            for (j=0; j < Conjuntos[i].Linhas.size(); j++){
+                cout << " -> Linha "<< j<<"  :"<< endl;
+                for (k=0;k< Conjuntos[i].Linhas[j].palavrasNaLinha.size();k++){
+                    cout << Conjuntos[i].Linhas[j].palavrasNaLinha[k].Endereco()<< endl;
+                }
+            }
+
+        }
+
     }
     //implementar impressão
 };
