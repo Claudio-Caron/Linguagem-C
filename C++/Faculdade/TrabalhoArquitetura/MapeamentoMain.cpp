@@ -1,68 +1,87 @@
 #include "Definicoes.h"
 
+//ALUNOS :
 
+//-> Cláudio André Ferreira Caron.
+//-> Issaka Diaw Seye.
+
+//================================================\\
+//AS FUNÇÕES ESTÃO COMENTADAS NA SUA PRIMEIRA LINHA \\
+//==================================================//
 
  int main(int argc, char const *argv[])
  {
-    srand(time(0));
+    srand(time(0)); // funcao para inicializar o tempo com base nos
+    //setlocale(LC_ALL, "pt_BR.UTF-8");
     MP MemoriaPrincipal;
     MemoriaCache Cache;
     PainelDeAbertura();
     DefinirTamanhos(MemoriaPrincipal, Cache);
     opcoes(MemoriaPrincipal, Cache);
     system ("pause");
-
-
     return 0;
  }
 
+
  void PainelDeAbertura(){
+     //FUNÇÃO APENAS PARA IMPRIMIR A MENSAGEM INICIAL
     cout << "\n\n\n\n\n\n\n\t\t\t\t           ---------------------------" << endl;
-    cout           << "\t\t\t\t           | Trabalho de Arquitetura |" <<endl;
+    cout <<"\t\t\t\t           | TRABALHO DE ARQUITETURA |"<< endl;
     cout           << "\t\t\t\t           ---------------------------\n\n\n\t\t\t\t       ";
-    // PERSONALIZAR CONFORME POSSUIR TEMPO
     system ("pause");
      system ("cls");
  }
 
- void opcoes(MP& memoria, MemoriaCache& cache){
-    int x=-1;
-    while(x!=0){
-       system ("cls");
-        cout << "\t\t\tEscolha uma das opcoes: " << endl;
-        cout << "\t\t\t  1 -> Buscar endereco na cache "<< endl;
-        cout << "\t\t\t  2 -> Redefinir tamanhos de memorias\n\t\t\t";
-        cout << "  3 -> Imprimir Memoria Principal\n\t\t\t  4 -> Imprimir Memoria Cache\n\t\t\t  0 -> X-SAIR-X\n" << endl;
-        cin >> x;
+ void opcoes(MP& memoria, MemoriaCache& cache){ // FUNÇÃO PARA EXIBIR O MENU DE OPÇÕES E CONTROLAR POR MEIO DO SWITCH
+    char x='8';
+    string a;
+    while(x!='0'){
         system ("cls");
+        cin.clear();
+        cout << "\t\t\t\t     Escolha uma das opcoes: " << endl;
+        cout << "\t\t\t\t       1 -> Buscar endereco na cache "<< endl;
+        cout << "\t\t\t\t       2 -> Redefinir tamanhos de memorias\n\t\t\t\t";
+        cout << "       3 -> Imprimir Memoria Principal\n\t\t\t\t       4 -> Imprimir Memoria Cache\n\t\t\t\t       5 -> Exibir informacoes da MP e da memoria cache\n\t\t\t\t       0 -> X-SAIR-X\n\t\t\t\t\t       ";
+        cin >> a;
+        x=a[0];
     switch (x){
-    case 1 :
+    case '1' :
+        system ("cls");
         LerEnderecos(cache, memoria);
-        //Inserir endereço para verificar taxa de acerto e falha na cache
         break;
-    case 2 :
+    case '2' :
+        system ("cls");
         DefinirTamanhos(memoria, cache);
-        //Redefinir tamanhos(Deletar vetores
         break;
-    case 3 :
+    case '3' :
+        system ("cls");
         memoria.ImprimirMemoria();
         PausePersonalizado("\n -> Pressione qualquer tecla para retornar ao menu");
         break;
-    case 4 :
+    case '4' :
+        system ("cls");
         cache.Imprimir();
         PausePersonalizado("\n -> Pressione qualquer tecla para retornar ao menu");
         break;
-    case 0 :
+    case '5' :
+        system ("cls");
+        cout << memoria.MostrarAtributos()<< endl;
+        cout << cache.MostrarAtributos();
+        PausePersonalizado("\n -> Pressione qualquer tecla para retornar ao menu");
+        break;
+    case '0' :
         //sair
+        system ("cls");
         cout << "\t\t\t\t|\\\\ MEMORIAS RESULTANTES : ///|"<< endl;
         memoria.ImprimirMemoria();
         cache.Imprimir();
-        if (cache.acertos+cache.falhas+cache.substituicoes!=0){
-            cout << "\n -> Taxa de acertos : " <<  (cache.acertos/(cache.acertos+cache.falhas+cache.substituicoes))*100<< " %" <<endl;
+        if (cache.acessos!=0){
+            cout << "\n -> Taxa de acertos : " <<(cache.acertos/cache.acessos)*100  << " %" <<endl;
             cout << " -> Substituicoes realizadas : "<< cache.substituicoes << endl;
-            cout << "Taxa de falhas : " << (cache.falhas/(cache.falhas + cache.acertos + cache.substituicoes))*100 << " %"<< endl;
+            cout << " -> Taxa de falhas : " <<(1-(cache.acertos/cache.acessos))*100 << " %"<< endl;
         }else{
-
+            cout << "\n X - NAO HOUVE ACESSO A CACHE - x"<< endl;
+            //nao houveraam acessos
         }
 
         cout << "\n ----------------------"<< endl;
@@ -70,13 +89,17 @@
         cout << " ----------------------"<< endl;
         break;
     default :
-        PausePersonalizado("Opcao invalida! insira qualquer tecla para retornar ao menu.");
+        PausePersonalizado("\n\t\t\t\t\t   <OPCAO INVALIDA>!\n\t\t\t        * insira qualquer tecla para retornar ao menu *");
         break;
     }
     }
  }
+
 void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache){
-    //controlar a entrada de tamanho -> if tal tamanho do vetor tamanhos ser incorreto, mostrar a mensagem e dar o continue
+    //FUNÇÃO QUE LÊ O ARQUIVO DE ENTRADA DE TAMANHOS E É RESPONSÁVEL POR INICIALIZAR
+    //OU REDEFINIR O TAMANHO DAS MEMÓRIAS, NO CASO DE REDEFINIR,
+    // ESSA FUNÇÃO UTILIZA UMA FUNÇÃO PARA LIMPAR A CACHE E MEMORIA.
+    //TAMBÉM CALCULA OS BITS E TAMANHOS DE CACHE E MEMORIA, DEFINE E INSTANCIA AS MESMAS.
     string Path;
     ifstream Arquivo;
     bool RedefinirTMemoria;
@@ -130,10 +153,12 @@ void DefinirTamanhos(MP& memoriaP, MemoriaCache& cache){
     Arquivo.close();
 }
 void preenchercache(MemoriaCache& cache){
+    //FUNÇÃO QUE ALOCA A QUANTIDADE NECESSÁRIA DE CONJUNTOS NA CACHE
     cache.Conjuntos.resize(cache.TamcacheEmLinha/cache.TamConjunto);
 }
 
 void preenchermemoria(MP& memoria ){
+    // FUNÇÃO QUE PREENCHE A MEMÓRIA COM ENDEREÇOS EM DECIMAL, RESPECTIVOS AOS TAGBITS, DBITS E WBITS E OS DADOS ALEATÓRIOS DE CADA PALAVRA.
     int i, j, k, x;
     for (k=0;k<pow(2,memoria.tag_bits);k++){
         for(i=0; i<pow(2,memoria.d_bits);i++){
@@ -155,18 +180,23 @@ void preenchermemoria(MP& memoria ){
 
 
 void PausePersonalizado(string mensagem){
+    // FUNÇÃO COM COMANDO SEMELHANTE AO SYSTEM ("PAUSE"), PORÉM COM MENSAGEM MANIPULADA PELO PARÂMETRO
     cout << mensagem  ;
     _getch();
 }
 
 bool EsvaziarMemoria(MP& memoria, MemoriaCache& cache){
+    //FUNÇÃO PARA ESVAZIAR A MP E CACHE, E REINICIAR OS CONTADORES
+    //O RETORNO BOOLEANO É PARA SABER SE É A PRIMEIRA VEZ QUE A MEMORIA
+    //ESTÁ SENDO CRIADA, OU SE ESTÁ SENDO REDEFINIDA, COM FITO DE
+    //IMPRIMIR AO USUÁRIO A MENSAGEM DE MEMORIAS CRIADAS OU DE REDEFINIDAS
     bool primeira;
     if (!memoria.palavras.empty()){
         primeira=false;
         memoria.palavras.clear();
         cache.Conjuntos.clear();
         cache.acertos=0;
-        cache.falhas=0;
+        cache.acessos=0;
         cache.substituicoes=0;
     }else{
         primeira=true;
@@ -175,20 +205,24 @@ bool EsvaziarMemoria(MP& memoria, MemoriaCache& cache){
 }
 
 void LerEnderecos(MemoriaCache& Cache, MP& memoria){
+    // FUNÇÃO RESPONSÁVEL POR SOLICITAR AO USUÁRIO A MANEIRA DE LEITURA DE ENDEREÇOS,
+    //VERIFICAR SE O ENDEREÇO POSSUI OS BITS NECESSARIOS DE ENDEREÇO E SE ESTÁ EM DECIMAL.
+    //NO CASO DA INSERÇÃO MANUAL, APÓS TRATAR A ENTRADA, O ENDEREÇO É CONFERIDO E FEITO O MAPEAMENTO
+    //POR MEIO DA CHAMADA DA FUNÇÃO VerificarCache. NO CASO DOS ENDEREÇOS POR ARQUIVO, CADA ENDEREÇO É
+    //ENVIADO E TESTADO POR VEZ NA FUNÇÃO VerificarCache.
     ifstream entradaArquivo;
-    string s, endereco;
+    string s, endereco, x="0";
     bool certo;
-   // vector <string> endereco;
-    int x=0, i, a;
-    while (x!=1 and x!=2){
+    int  i, a;
+    while (x!="1" and x!="2"){
         cout << "Como deseja buscar endereco na cache? \n 1 -> Somente um endereco por meio do teclado.\n 2 -> Um ou mais enderecos por meio de arquivo." << endl;
         cin >>  x;
-        if (x!=1 and x!=2){
+        if (x!="1" and x!="2"){
             system ("cls");
             cout << "* Insira uma opcao valida ! *" <<endl;
         }
     }
-    if (x==1){  // modularizar
+    if (x=="1"){  // modularizar
         system ("cls");
         while (true){
             cout << " -> Insira o Endereco em Binario com "<< (memoria.s_bits+memoria.w_bits) << " bits : " << endl;
@@ -216,14 +250,12 @@ void LerEnderecos(MemoriaCache& Cache, MP& memoria){
                 }
             }
         }
-       // i=stoi(s, nullptr, 2);
-        //cout << "Teste de Conversao : Endereco lido : " << i <<  endl;
         system ("cls");
         VerificarCache(s,memoria, Cache);
         PausePersonalizado("Pressione qualquer tecla para retornar ao menu ");
 
     }else{  //  modularizar
-        if (x==2){
+        if (x=="2"){
             system ("cls");
             do {
             cout << " -> Insira o nome do arquivo com a extensao .txt se estiver na pasta\n -> Ou insira o caminho completo do arquivo de enderecos (sem aspas)\n" << endl;
@@ -273,6 +305,15 @@ void LerEnderecos(MemoriaCache& Cache, MP& memoria){
 }
 
 void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
+    //FUNÇÃO QUE RECEBE COMO PARÂMETROS A MP , CACHE E O ENDEREÇO A SER FEITO
+    //O MAPEAMENTO. A VARIÁVEL aux VAI RECEBENDO SUBSTRINGS DOS BITS RESPECTIVOS DO ENDEREÇO
+    // E EM SEGUIDA, CONVERTIDO EM DECIMAL E ARMAZENADO NAS VARIÁVEIS tagbits, dbits, wbits, sbits .
+    // O PRIMEIRO FOR VERIFICA SE A TAG FORNECIDA PELO ENDEREÇO É PARTE DE UMA DAS LINHAS DO CONJUNTO
+    // IDENTIFICADO PELOS DBITS DO ENDEREÇO. SE ESTIVER, OK, É SOMADO OS ACERTOS E EXIBIDO AS PALAVRAS DA LINHA.
+    // SE A TAG NÃO FOR ENCONTRADA NO FOR, O CONDICIONAL SEGUINTE VERIFICA SE O CONJUNTO ESTÁ COM TODAS AS LINHAS OCUPADAS
+    // SE ESTIVER, IRÁ CHAMAR LFU E SUBSTITUIR A LINHA MENOS FREQUENTEMENTE USADA, SENÃO, IRÁ PARA O DESVIO, ONDE SERÁ CRIADA
+    // UMA NOVA LINHA COM AS PALAVRAS DO BLOCO DA MEMORIA QUE DEVEM SER MAPEADAS PELO ENDEREÇO FORNECIDO, NA PRIMEIRA LINHA
+    //VAZIA QUE ENCONTRAR.
     int i, j, id, k;
     string aux;
     int tagbits, dbits, wbits, sbits;
@@ -288,7 +329,7 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
 
     aux = ender.substr(0, memoria.s_bits);
     sbits = stoi(aux, nullptr, 2);
-
+    cache.acessos++;
     for (i=0;i<(cache.Conjuntos[dbits].Linhas.size());i++){
         if (cache.Conjuntos[dbits].Linhas[i].tag == tagbits){
             cache.acertos++;
@@ -323,17 +364,17 @@ void VerificarCache(string ender, MP& memoria, MemoriaCache& cache){
         cout << " -> Palavras adicionadas : " <<endl;
         for (j = 0; j < pow(2, memoria.w_bits); j++) {
             novaLinha.palavrasNaLinha.push_back(memoria.palavras[(sbits*pow(2,memoria.w_bits)) + j]);
-            cout << memoria.palavras[(sbits*pow(2,memoria.w_bits)) + j].Endereco()<< endl;
+            cout << memoria.palavras[(sbits*pow(2,memoria.w_bits)) + j].Endereco()<< endl;//imprimir o bloco que foi trazido para a cache;
         }
-        cache.falhas++;
-        //imprimir o bloco que foi trazido para a cache;
         cache.Conjuntos[dbits].Linhas.push_back(novaLinha);
         cache.Conjuntos[dbits].Linhas[cache.Conjuntos[dbits].Linhas.size() -1].frequencia=1;
         cout<< "\n # O bloco '"<< sbits << "' foi adicionado na cache # \n" << endl;
     }
 }
 
-int LFU(Conjunto c, int tam){ //transformar em um método na struct conjunto
+int LFU(Conjunto c, int tam){
+    //FUNÇÃO DE APLICAÇÃO DO ALGORITMO DE SUBSTITUIÇÃO LFU, PARA QUE NO CASO EM QUE
+    //O CONJUNTO NA CACHE ESTIVER CHEIO, SUBSTIUIR O MENOS FREQUENTEMENTE ACESSADO
     int i, id=0, menosfrequente=c.Linhas[0].frequencia;
     for (i=0;i<tam; i++){
         if (c.Linhas[i].frequencia<menosfrequente){
@@ -345,21 +386,24 @@ int LFU(Conjunto c, int tam){ //transformar em um método na struct conjunto
 }
 
 bool VerificarTamanhos(int NumeroDeLinhas, int Tamanhos[], int n){
+    //FUNÇÃO PARA VERIFICAR E AVISAR AO USUÁRIO SOBRE TAMANHOS INVÁLIDOS QUE
+    //PODEM SER FORNECIDOS NO ARQUIVO DE ENTRADA DE TAMANHOS
+    //
     bool erro=false;
-    if (Tamanhos[0]>256){
-        cout << "\t*** | O tamanho da memoria, lido na primeira linha do arquivo inserido, possui valor acima do permitido ! | ***\n" << endl;
+    if (Tamanhos[0]>256 or Tamanhos[0]<=0){
+        cout << "\t*** | O tamanho da memoria, lido na primeira linha do arquivo inserido, possui valor nao permitido ! | ***\n" << endl;
         erro=true;
     }
     if (Tamanhos[1]!=2 and Tamanhos[1]!=4 and Tamanhos[1]!=8){
         cout <<"\t*** | A quantidade de palavras, lido na segunda linha do arquivo, possui valores invalidos ! | ***\n"<< endl;
         erro=true;
     }
-    if (Tamanhos[2]> 32){
-        cout << "\t*** | O tamanho da Cache, lido na terceira linha do arquivo, possui tamanho maior que o permitido ! | ***\n" << endl;
+    if (Tamanhos[2]> 32 or Tamanhos[2]<=0){
+        cout << "\t*** | O tamanho da Cache, lido na terceira linha do arquivo, possui tamanho nao permitido ! | ***\n" << endl;
         erro=true;
     }
     if (Tamanhos[3]<2 or Tamanhos[3]>(NumeroDeLinhas/2)){
-        cout << "\t*** | O Numero de linhas por conjunto da cache ,lido na quarta linha do Arquivo, está fora do limite permitido ! | ***"<< endl;
+        cout << "\t*** | O numero de linhas por conjunto da cache ,lido na quarta linha do Arquivo, esta fora do limite permitido ! | ***"<< endl;
         erro=true;
     }
     return erro;
